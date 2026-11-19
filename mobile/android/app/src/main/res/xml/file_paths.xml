@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Sealed packet exports and receipt PDFs live here; nothing else is shareable. -->
+    <cache-path name="packet_exports" path="packet-exports/" />
+    <cache-path name="receipts" path="receipts/" />
+    <cache-path name="capture" path="capture/" />
+</paths>

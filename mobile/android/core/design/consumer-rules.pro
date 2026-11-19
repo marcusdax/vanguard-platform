@@ -1,0 +1,1 @@
+# Fieldwright library consumer rules

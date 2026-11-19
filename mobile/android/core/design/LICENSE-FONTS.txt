@@ -1,0 +1,23 @@
+Fieldwright bundles two typefaces. Both are licensed under the SIL Open Font License 1.1.
+
+Fraunces
+  Copyright 2018 The Fraunces Project Authors (https://github.com/undercasetype/Fraunces)
+  Licensed under the SIL Open Font License, Version 1.1.
+  Full licence text: https://scripts.sil.org/OFL
+
+Outfit
+  Copyright 2021 The Outfit Project Authors (https://github.com/Outfitio/Outfit-Fonts)
+  Licensed under the SIL Open Font License, Version 1.1.
+  Full licence text: https://scripts.sil.org/OFL
+
+Files bundled in this module:
+  src/main/res/font/fraunces_500.ttf
+  src/main/res/font/fraunces_600.ttf
+  src/main/res/font/outfit_400.ttf
+  src/main/res/font/outfit_500.ttf
+  src/main/res/font/outfit_600.ttf
+
+The OFL permits bundling and embedding of the fonts in applications provided the
+copyright notice and licence are retained (as they are here) and the fonts are not
+sold on their own. The "Reserved Font Name" rules mean a modified font must not use
+the original name; these files are unmodified copies of the upstream releases.

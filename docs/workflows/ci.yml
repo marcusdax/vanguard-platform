@@ -1,0 +1,79 @@
+name: Vanguard Platform CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  brand-and-engine:
+    name: Brand Check & @vanguard/trust-engine
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/brand-check.mjs
+      - name: Test @vanguard/trust-engine
+        working-directory: packages/trust-engine
+        run: |
+          npm install
+          npm test
+
+  web-frontend:
+    name: Web Typecheck, Unit Tests & Production Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - working-directory: apps/web
+        run: |
+          npm install
+          npx tsc --noEmit
+          npm test
+          npm run build
+
+  api-backend:
+    name: API Prisma, Typecheck & Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - working-directory: services/api
+        run: |
+          npm install
+          npx prisma generate
+          npx tsc --noEmit
+          npm test
+
+  vision-sidecar:
+    name: Python Vision Sidecar Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - working-directory: services/vision
+        run: |
+          pip install -r requirements.txt pytest httpx
+          pytest
+
+  android-field:
+    name: Vanguard Field Android Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Run unit tests across core and Vanguard features
+        working-directory: mobile/android
+        run: ./gradlew :core:model:test :core:crypto:test :feature:vanguard:testDebugUnitTest --no-daemon

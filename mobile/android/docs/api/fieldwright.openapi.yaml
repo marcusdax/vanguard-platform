@@ -1,0 +1,2245 @@
+openapi: 3.1.0
+info:
+  title: Fieldwright API
+  version: 1.0.0
+  summary: Field-evidence marketplace contract for the Fieldwright Android app.
+  description: |
+    Contract for the Fieldwright Android client and the backend that verifies, anchors and
+    settles sealed evidence packets. The server is authoritative for money and job lifecycle;
+    the client is never trusted to assert a tier, badge state or seal (invariant INV-6).
+
+    Conventions: money is integer cents suffixed Cents; timestamps are ISO-8601 UTC with
+    milliseconds and a trailing Z; hashes are 64 lowercase hex characters; enum values are the
+    Kotlin constant names from core:model. Every mutating POST that creates or changes money or
+    evidence requires an Idempotency-Key header. Mutations that replace a versioned resource
+    require If-Match and return 412 PRECONDITION_FAILED on a stale ETag.
+
+    This file is the machine-readable companion to docs/03-api-contract.md. The zero-dependency
+    mock server at backend/mock-server.mjs implements this surface in memory.
+  contact:
+    name: Fieldwright engineering
+  license:
+    name: Proprietary
+servers:
+  - url: http://10.0.2.2:8787/v1
+    description: Android emulator against the local mock server
+  - url: https://api.fieldwright.example/v1
+    description: Production placeholder until a domain is chosen
+security:
+  - bearerAuth: []
+tags:
+  - name: system
+    description: Liveness and authentication
+  - name: operator
+    description: Profile, availability and balances
+  - name: jobs
+    description: Job lifecycle and arrival
+  - name: offers
+    description: Time-boxed dispatch offers
+  - name: packets
+    description: Sealed evidence packets, verification, export and anchoring
+  - name: money
+    description: Ledger and payouts
+  - name: sync
+    description: Outbox batch flush
+paths:
+  /healthz:
+    get:
+      tags: [system]
+      operationId: healthz
+      summary: Liveness check
+      security: []
+      responses:
+        '200':
+          description: Service is up.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /auth/token:
+    post:
+      tags: [system]
+      operationId: createToken
+      summary: Exchange device attestation for a bearer token
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+      responses:
+        '201':
+          description: Token issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /me:
+    get:
+      tags: [operator]
+      operationId: getMe
+      summary: Current operator profile
+      responses:
+        '200':
+          description: Operator profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Operator'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /me/availability:
+    get:
+      tags: [operator]
+      operationId: getAvailability
+      summary: Current availability and auto-accept policy
+      responses:
+        '200':
+          description: Availability.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Availability'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/ServerError'
+    put:
+      tags: [operator]
+      operationId: putAvailability
+      summary: Replace availability (online toggle, radius, auto-accept policy)
+      description: Full replacement. If-Match is required; a stale ETag returns 412 and the client must refetch and re-apply the user intent.
+      parameters:
+        - $ref: '#/components/parameters/IfMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AvailabilityUpdate'
+      responses:
+        '200':
+          description: Availability replaced.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Availability'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /me/balances:
+    get:
+      tags: [operator]
+      operationId: getBalances
+      summary: Derived balances
+      responses:
+        '200':
+          description: Balances.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balances'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /me/earnings:
+    get:
+      tags: [operator]
+      operationId: getEarnings
+      summary: Earnings summary
+      responses:
+        '200':
+          description: Earnings summary.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EarningsSummary'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /me/ledger:
+    get:
+      tags: [money]
+      operationId: listLedger
+      summary: Ledger entries for the operator
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Ledger page.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LedgerPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /jobs:
+    get:
+      tags: [jobs]
+      operationId: listJobs
+      summary: Job list for the Jobs screen
+      parameters:
+        - name: scope
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [offers, active, done]
+            default: active
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Job page.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /jobs/{jobId}:
+    get:
+      tags: [jobs]
+      operationId: getJob
+      summary: Job detail
+      parameters:
+        - $ref: '#/components/parameters/JobIdPath'
+      responses:
+        '200':
+          description: Job.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /jobs/{jobId}/en-route:
+    post:
+      tags: [jobs]
+      operationId: markEnRoute
+      summary: Move an accepted job to EN_ROUTE
+      parameters:
+        - $ref: '#/components/parameters/JobIdPath'
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/BaseVersion'
+      responses:
+        '200':
+          description: Updated job.
+          headers:
+            Idempotent-Replayed:
+              $ref: '#/components/headers/IdempotentReplayed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /jobs/{jobId}/arrivals:
+    post:
+      tags: [jobs]
+      operationId: recordArrival
+      summary: Geofence arrival check and confirmation
+      description: |
+        Arrival is accepted when distanceMeters is within geofence radius plus reported accuracy
+        and accuracy is at most 100 m. A SIMULATED fix never satisfies the gate for a non-demo
+        job. An override is accepted only with a reason and flags the packet for review.
+      parameters:
+        - $ref: '#/components/parameters/JobIdPath'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArrivalRequest'
+      responses:
+        '200':
+          description: Arrival check result.
+          headers:
+            Idempotent-Replayed:
+              $ref: '#/components/headers/IdempotentReplayed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrivalCheck'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /jobs/{jobId}/capture/start:
+    post:
+      tags: [jobs]
+      operationId: startCapture
+      summary: Move an on-site job to IN_PROGRESS
+      parameters:
+        - $ref: '#/components/parameters/JobIdPath'
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/BaseVersion'
+      responses:
+        '200':
+          description: Updated job.
+          headers:
+            Idempotent-Replayed:
+              $ref: '#/components/headers/IdempotentReplayed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /offers:
+    get:
+      tags: [offers]
+      operationId: listOffers
+      summary: Pending offers for the current operator
+      responses:
+        '200':
+          description: Offers and their as-of time.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /offers/{offerId}/accept:
+    post:
+      tags: [offers]
+      operationId: acceptOffer
+      summary: Accept an offer before its TTL expires
+      description: |
+        Server checks in one transaction: the offer is PENDING for this operator, now is before
+        expiresAt, the active job count is below 3, credentials cover the job type, and the
+        fatigue cap is not exceeded. Failures return 409 OFFER_EXPIRED, 409 OFFER_TAKEN,
+        409 JOB_STATE_INVALID or 403 CREDENTIAL_REQUIRED with details naming the rule.
+      parameters:
+        - name: offerId
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: Offer accepted.
+          headers:
+            Idempotent-Replayed:
+              $ref: '#/components/headers/IdempotentReplayed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptOfferResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /offers/{offerId}/decline:
+    post:
+      tags: [offers]
+      operationId: declineOffer
+      summary: Pass on an offer with a human reason
+      parameters:
+        - name: offerId
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeclineRequest'
+      responses:
+        '204':
+          description: Declined.
+          headers:
+            Idempotent-Replayed:
+              $ref: '#/components/headers/IdempotentReplayed'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /jobs/{jobId}/packets:
+    post:
+      tags: [packets]
+      operationId: uploadSealedPacket
+      summary: Upload a sealed packet
+      description: |
+        The server re-walks the hash chain from GENESIS, verifies the signature shape, re-derives
+        tier and badge state, and rejects any client-asserted tier or seal that disagrees with
+        its derivation. A packet for a demo job is stored but never anchored. The same job
+        cannot have two packets with different head hashes.
+      parameters:
+        - $ref: '#/components/parameters/JobIdPath'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PacketSubmission'
+      responses:
+        '201':
+          description: Packet accepted.
+          headers:
+            Idempotent-Replayed:
+              $ref: '#/components/headers/IdempotentReplayed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PacketReceipt'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /packets:
+    get:
+      tags: [packets]
+      operationId: listPackets
+      summary: Vault packet list
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [all, sealed, attention]
+            default: all
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Packet page.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PacketPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /packets/{packetId}:
+    get:
+      tags: [packets]
+      operationId: getPacket
+      summary: Packet detail
+      parameters:
+        - $ref: '#/components/parameters/PacketIdPath'
+      responses:
+        '200':
+          description: Packet.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidencePacket'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /packets/{packetId}/verify:
+    post:
+      tags: [packets]
+      operationId: verifyPacket
+      summary: Re-walk the chain and verify the signature
+      parameters:
+        - $ref: '#/components/parameters/PacketIdPath'
+      responses:
+        '200':
+          description: Verification result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyReceipt'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /packets/{packetId}/export:
+    get:
+      tags: [packets]
+      operationId: exportPacket
+      summary: Canonical JSON and custody text for a sealed packet
+      parameters:
+        - $ref: '#/components/parameters/PacketIdPath'
+      responses:
+        '200':
+          description: Export payload.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PacketExport'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /packets/{packetId}/anchor:
+    post:
+      tags: [packets]
+      operationId: anchorPacket
+      summary: Append a leaf to the transparency log and return an inclusion proof
+      parameters:
+        - $ref: '#/components/parameters/PacketIdPath'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: Anchor receipt.
+          headers:
+            Idempotent-Replayed:
+              $ref: '#/components/headers/IdempotentReplayed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnchorReceipt'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /packets/{packetId}/corrections:
+    post:
+      tags: [packets]
+      operationId: appendCorrection
+      summary: Append a CORRECTION record (never an edit)
+      parameters:
+        - $ref: '#/components/parameters/PacketIdPath'
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/IfMatchOptional'
+        - $ref: '#/components/parameters/BaseVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CorrectionRequest'
+      responses:
+        '200':
+          description: Updated packet.
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidencePacket'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /log/head:
+    get:
+      tags: [packets]
+      operationId: getLogHead
+      summary: Current transparency log head
+      responses:
+        '200':
+          description: Log head.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogHead'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /payouts/quote:
+    post:
+      tags: [money]
+      operationId: quotePayout
+      summary: Fee-disclosed payout quote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutQuoteRequest'
+      responses:
+        '200':
+          description: Quote.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayoutQuote'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /payouts:
+    get:
+      tags: [money]
+      operationId: listPayouts
+      summary: Payout history
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Payout page.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayoutPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        default:
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags: [money]
+      operationId: requestPayout
+      summary: Request a payout (idempotent)
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutCreateRequest'
+      responses:
+        '201':
+          description: Payout requested.
+          headers:
+            Idempotent-Replayed:
+              $ref: '#/components/headers/IdempotentReplayed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayoutRequest'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /payouts/{payoutId}:
+    get:
+      tags: [money]
+      operationId: getPayout
+      summary: Payout detail
+      parameters:
+        - name: payoutId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayoutRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/ServerError'
+  /sync/batch:
+    post:
+      tags: [sync]
+      operationId: syncBatch
+      summary: Flush the outbox in one request
+      description: |
+        Events are ordered per aggregate. The batch is idempotent per event key. Each result is
+        APPLIED, DUPLICATE, REJECTED, RETRY or CONFLICT; the client acks APPLIED and DUPLICATE,
+        keeps RETRY, and dead-letters REJECTED and CONFLICT for human handling.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyncBatchRequest'
+      responses:
+        '200':
+          description: Per-event results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncBatchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        default:
+          $ref: '#/components/responses/ServerError'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: opaque
+  headers:
+    ETag:
+      description: Strong entity tag of the resource version, for example "v3".
+      schema:
+        type: string
+    IdempotentReplayed:
+      description: True when the response is a replay of an earlier request with the same Idempotency-Key.
+      schema:
+        type: boolean
+    XRequestId:
+      description: Server request id, repeated in error bodies.
+      schema:
+        type: string
+    RateLimitLimit:
+      description: Requests allowed in the current window for this bucket.
+      schema:
+        type: integer
+    RateLimitRemaining:
+      description: Requests remaining in the current window.
+      schema:
+        type: integer
+    RateLimitReset:
+      description: Seconds until the current window resets.
+      schema:
+        type: integer
+    RetryAfter:
+      description: Seconds to wait before retrying a 429 or 503.
+      schema:
+        type: integer
+  parameters:
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: Opaque pagination cursor from a previous page's nextCursor.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Page size 1-100.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    JobIdPath:
+      name: jobId
+      in: path
+      required: true
+      schema:
+        type: string
+    PacketIdPath:
+      name: packetId
+      in: path
+      required: true
+      schema:
+        type: string
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      description: Deterministic key derived from canonical inputs; 8-128 characters.
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 128
+    BaseVersion:
+      name: X-FW-Base-Version
+      in: header
+      required: false
+      description: Optional aggregate version the client last read. A mismatch with the current version returns 409 VERSION_CONFLICT with details.currentVersion, before any rule runs.
+      schema:
+        type: integer
+        minimum: 1
+    IfMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: Current ETag of the resource. A stale value returns 412.
+      schema:
+        type: string
+    IfMatchOptional:
+      name: If-Match
+      in: header
+      required: false
+      description: Optional current ETag of the packet. A stale value returns 412.
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Malformed request, unknown field, or bad value.
+      headers:
+        X-Request-Id:
+          $ref: '#/components/headers/XRequestId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing, expired or invalid bearer token.
+      headers:
+        X-Request-Id:
+          $ref: '#/components/headers/XRequestId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Token does not own the resource, or a credential or attestation gate failed.
+      headers:
+        X-Request-Id:
+          $ref: '#/components/headers/XRequestId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Unknown id, including ids that belong to another operator.
+      headers:
+        X-Request-Id:
+          $ref: '#/components/headers/XRequestId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Conflict:
+      description: Legal-transition, offer, packet or version conflict.
+      headers:
+        X-Request-Id:
+          $ref: '#/components/headers/XRequestId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    PreconditionFailed:
+      description: If-Match did not match the current ETag.
+      headers:
+        X-Request-Id:
+          $ref: '#/components/headers/XRequestId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Semantically invalid: amount, credential, chain, signature or derivation mismatch.
+      headers:
+        X-Request-Id:
+          $ref: '#/components/headers/XRequestId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Rate limit or shared dependency exhausted.
+      headers:
+        Retry-After:
+          $ref: '#/components/headers/RetryAfter'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServerError:
+      description: Unhandled server error. Idempotent requests are safe to retry.
+      headers:
+        X-Request-Id:
+          $ref: '#/components/headers/XRequestId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    Timestamp:
+      type: string
+      format: date-time
+      pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$'
+      example: '2026-11-17T12:10:04.512Z'
+    Hash:
+      type: string
+      pattern: '^[0-9a-f]{64}$'
+      example: '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'
+    HashOrNull:
+      type: [string, 'null']
+      pattern: '^[0-9a-f]{64}$'
+    Cents:
+      type: integer
+      description: Integer cents. Positive for earnings, negative for fees and reversals.
+    NullableTimestamp:
+      type: [string, 'null']
+      format: date-time
+      pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$'
+    Error:
+      type: object
+      required: [code, message, retryable, requestId]
+      properties:
+        code:
+          type: string
+          example: JOB_STATE_INVALID
+        message:
+          type: string
+          description: Engineer- and support-facing sentence. UI copy comes from the client.
+        retryable:
+          type: boolean
+        requestId:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+          description: Machine-readable context, for example currentStatus and allowed.
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    HealthResponse:
+      type: object
+      required: [status, now, seeded]
+      properties:
+        status:
+          type: string
+          enum: [ok]
+        now:
+          $ref: '#/components/schemas/Timestamp'
+        seeded:
+          type: boolean
+    TokenRequest:
+      type: object
+      required: [deviceId, attestation, appVersion, sdkInt]
+      properties:
+        deviceId:
+          type: string
+          maxLength: 64
+        attestation:
+          type: string
+          description: Play Integrity token in production; the mock server accepts dev-attestation.
+        appVersion:
+          type: string
+          pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+        sdkInt:
+          type: integer
+          minimum: 24
+    TokenResponse:
+      type: object
+      required: [token, expiresAt, operatorId]
+      properties:
+        token:
+          type: string
+        expiresAt:
+          $ref: '#/components/schemas/Timestamp'
+        operatorId:
+          type: string
+    GeoPoint:
+      type: object
+      required: [lat, lng, recordedAt, accuracyMeters, source]
+      properties:
+        lat:
+          type: number
+          minimum: -90
+          maximum: 90
+        lng:
+          type: number
+          minimum: -180
+          maximum: 180
+        recordedAt:
+          $ref: '#/components/schemas/Timestamp'
+        accuracyMeters:
+          type: number
+          minimum: 0
+        source:
+          type: string
+          enum: [GPS, NETWORK, SIMULATED]
+    Requester:
+      type: object
+      required: [org, contactName, kind, billingLabel]
+      properties:
+        org:
+          type: string
+          maxLength: 120
+        contactName:
+          type: [string, 'null']
+          maxLength: 120
+        kind:
+          type: string
+          enum: [INSURER, PROPERTY_MANAGER, UTILITY, CONTRACTOR, OWNER]
+        billingLabel:
+          type: string
+          maxLength: 120
+        # contactName is required-and-nullable so the field name is stable on the wire.
+    Site:
+      type: object
+      required: [address, point, geofenceRadiusMeters, planLabel]
+      properties:
+        address:
+          type: string
+          maxLength: 200
+        unit:
+          type: [string, 'null']
+          maxLength: 40
+        point:
+          $ref: '#/components/schemas/GeoPoint'
+        geofenceRadiusMeters:
+          type: integer
+          minimum: 25
+          maximum: 500
+        accessNotes:
+          type: [string, 'null']
+          maxLength: 400
+        planLabel:
+          type: string
+          maxLength: 120
+    Credential:
+      type: string
+      enum: [RPZ_BACKFLOW_TESTER, ROOF_SAFETY, PROPERTY_INSPECTOR, NOTARY, DRONE_PILOT]
+    JobType:
+      type: string
+      enum: [ROOF_HAIL, RPZ_TEST, PROPERTY_WALK, METER_CLUSTER, PROGRESS_PROOF, CLAIM_SWEEP]
+    JobStatus:
+      type: string
+      enum:
+        - SCHEDULED
+        - AVAILABLE
+        - OFFERED
+        - ACCEPTED
+        - EN_ROUTE
+        - ON_SITE
+        - IN_PROGRESS
+        - PACKET_READY
+        - SEALED
+        - SUBMITTED
+        - UNDER_REVIEW
+        - APPROVED
+        - PAID
+        - DISPUTED
+        - CANCELLED
+        - EXPIRED
+    ProofKind:
+      type: string
+      enum: [PHOTO, MEASUREMENT, OBSERVATION, CONSENT]
+    ChecklistStep:
+      type: object
+      required: [key, label, hint, proofKind, required]
+      properties:
+        key:
+          type: string
+        label:
+          type: string
+        hint:
+          type: string
+        proofKind:
+          $ref: '#/components/schemas/ProofKind'
+        required:
+          type: boolean
+    StepResult:
+      type: string
+      enum: [PASS, FAIL, NOT_APPLICABLE, PENDING]
+    ChecklistResult:
+      type: object
+      required: [key, result, note, mediaIds]
+      properties:
+        key:
+          type: string
+        result:
+          $ref: '#/components/schemas/StepResult'
+        note:
+          type: string
+          maxLength: 500
+        mediaIds:
+          type: array
+          items:
+            type: string
+    Job:
+      type: object
+      required:
+        - id
+        - type
+        - title
+        - requester
+        - site
+        - status
+        - bountyCents
+        - bonusCents
+        - estimatedMinutes
+        - slaMinutes
+        - distanceMeters
+        - etaMinutes
+        - consentScope
+        - checklist
+        - requiredCredentials
+        - demo
+        - notes
+        - payoutCents
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/JobType'
+        title:
+          type: string
+        requester:
+          $ref: '#/components/schemas/Requester'
+        site:
+          $ref: '#/components/schemas/Site'
+        status:
+          $ref: '#/components/schemas/JobStatus'
+        bountyCents:
+          $ref: '#/components/schemas/Cents'
+        bonusCents:
+          $ref: '#/components/schemas/Cents'
+        estimatedMinutes:
+          type: integer
+          minimum: 1
+        scheduledFor:
+          $ref: '#/components/schemas/NullableTimestamp'
+        slaMinutes:
+          type: integer
+          minimum: 1
+        distanceMeters:
+          type: integer
+          minimum: 0
+        etaMinutes:
+          type: integer
+          minimum: 0
+        consentScope:
+          type: string
+        checklist:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChecklistStep'
+        requiredCredentials:
+          type: array
+          items:
+            $ref: '#/components/schemas/Credential'
+        demo:
+          type: boolean
+        notes:
+          type: string
+        acceptedAt:
+          $ref: '#/components/schemas/NullableTimestamp'
+        arrivedAt:
+          $ref: '#/components/schemas/NullableTimestamp'
+        sealedAt:
+          $ref: '#/components/schemas/NullableTimestamp'
+        packetId:
+          type: [string, 'null']
+        payoutCents:
+          allOf:
+            - $ref: '#/components/schemas/Cents'
+          readOnly: true
+          description: bountyCents + bonusCents. Derived; ignored if sent.
+        dollarsPerHour:
+          type: [number, 'null']
+          readOnly: true
+        version:
+          type: integer
+          readOnly: true
+    JobPage:
+      type: object
+      required: [items, nextCursor, asOf]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+        nextCursor:
+          type: [string, 'null']
+        asOf:
+          $ref: '#/components/schemas/Timestamp'
+    Operator:
+      type: object
+      required:
+        - id
+        - displayName
+        - initials
+        - credentialTier
+        - ratingAvg
+        - acceptanceRate
+        - onTimeRate
+        - completedJobs
+        - streakDays
+        - credentials
+        - payoutAccountLast4
+        - weeklyGoalCents
+        - memberSinceLabel
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
+        initials:
+          type: string
+          maxLength: 3
+        credentialTier:
+          type: integer
+          minimum: 1
+          maximum: 4
+        tierName:
+          type: string
+          readOnly: true
+          enum: [Scout, Inspector, Lead inspector, Commander]
+        ratingAvg:
+          type: number
+          minimum: 0
+          maximum: 5
+        acceptanceRate:
+          type: number
+          minimum: 0
+          maximum: 1
+        onTimeRate:
+          type: number
+          minimum: 0
+          maximum: 1
+        completedJobs:
+          type: integer
+          minimum: 0
+        streakDays:
+          type: integer
+          minimum: 0
+        credentials:
+          type: array
+          items:
+            $ref: '#/components/schemas/Credential'
+        payoutAccountLast4:
+          type: string
+          pattern: '^[0-9]{4}$'
+        weeklyGoalCents:
+          $ref: '#/components/schemas/Cents'
+        memberSinceLabel:
+          type: string
+    AutoAcceptPolicy:
+      type: object
+      required:
+        - enabled
+        - minPayoutCents
+        - maxDistanceMeters
+        - maxActiveStack
+        - allowedTypes
+        - requireCredentialMatch
+      properties:
+        enabled:
+          type: boolean
+        minPayoutCents:
+          $ref: '#/components/schemas/Cents'
+        maxDistanceMeters:
+          type: integer
+          minimum: 0
+          maximum: 25000
+        maxActiveStack:
+          type: integer
+          minimum: 1
+          maximum: 3
+        allowedTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobType'
+        requireCredentialMatch:
+          type: boolean
+    Availability:
+      type: object
+      required: [isOnline, updatedAt, radiusMeters, autoAccept, areaLabel]
+      properties:
+        isOnline:
+          type: boolean
+        updatedAt:
+          $ref: '#/components/schemas/Timestamp'
+        radiusMeters:
+          type: integer
+          enum: [5000, 10000, 15000, 25000]
+        autoAccept:
+          $ref: '#/components/schemas/AutoAcceptPolicy'
+        areaLabel:
+          type: string
+    AvailabilityUpdate:
+      type: object
+      required: [isOnline, radiusMeters, autoAccept, areaLabel]
+      properties:
+        isOnline:
+          type: boolean
+        radiusMeters:
+          type: integer
+          enum: [5000, 10000, 15000, 25000]
+        autoAccept:
+          $ref: '#/components/schemas/AutoAcceptPolicy'
+        areaLabel:
+          type: string
+    OfferStatus:
+      type: string
+      enum: [PENDING, ACCEPTED, DECLINED, EXPIRED, WITHDRAWN]
+    Offer:
+      type: object
+      required:
+        - id
+        - job
+        - operatorId
+        - payoutCents
+        - surgeMultiplier
+        - offeredAt
+        - expiresAt
+        - score
+        - scoreReasons
+        - etaMinutes
+        - autoAcceptEligible
+        - status
+      properties:
+        id:
+          type: string
+        job:
+          $ref: '#/components/schemas/Job'
+        operatorId:
+          type: string
+        payoutCents:
+          $ref: '#/components/schemas/Cents'
+        surgeMultiplier:
+          type: number
+          minimum: 1.0
+          maximum: 1.6
+        offeredAt:
+          $ref: '#/components/schemas/Timestamp'
+        expiresAt:
+          $ref: '#/components/schemas/Timestamp'
+        score:
+          type: number
+          minimum: 0
+          maximum: 1
+        scoreReasons:
+          type: array
+          items:
+            type: string
+        etaMinutes:
+          type: integer
+          minimum: 0
+        autoAcceptEligible:
+          type: boolean
+        status:
+          $ref: '#/components/schemas/OfferStatus'
+    OfferList:
+      type: object
+      required: [items, asOf]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer'
+        asOf:
+          $ref: '#/components/schemas/Timestamp'
+    AcceptOfferResponse:
+      type: object
+      required: [offer, job, acceptedAt]
+      properties:
+        offer:
+          $ref: '#/components/schemas/Offer'
+        job:
+          $ref: '#/components/schemas/Job'
+        acceptedAt:
+          $ref: '#/components/schemas/Timestamp'
+    DeclineRequest:
+      type: object
+      required: [reason]
+      properties:
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 200
+    ArrivalRequest:
+      type: object
+      required: [fix]
+      properties:
+        fix:
+          $ref: '#/components/schemas/GeoPoint'
+        overrideReason:
+          type: [string, 'null']
+          maxLength: 300
+    ArrivalCheck:
+      type: object
+      required: [accepted, insideGeofence, distanceMeters, accuracyMeters, detail, overrideRequired]
+      properties:
+        accepted:
+          type: boolean
+        insideGeofence:
+          type: boolean
+        distanceMeters:
+          type: number
+          minimum: 0
+        accuracyMeters:
+          type: number
+          minimum: 0
+        detail:
+          type: string
+        overrideRequired:
+          type: boolean
+    ConsentMethod:
+      type: string
+      enum: [IN_APP_SIGNATURE, VERBAL_RECORDED, PRE_AUTHORIZED]
+    Consent:
+      type: object
+      required:
+        - name
+        - role
+        - scopeText
+        - method
+        - capturedAt
+        - verifiedByOperatorId
+      properties:
+        name:
+          type: string
+          maxLength: 120
+        role:
+          type: string
+          maxLength: 80
+        scopeText:
+          type: string
+          maxLength: 1000
+        method:
+          $ref: '#/components/schemas/ConsentMethod'
+        capturedAt:
+          $ref: '#/components/schemas/Timestamp'
+        signatureHash:
+          $ref: '#/components/schemas/HashOrNull'
+        verifiedByOperatorId:
+          type: string
+    MediaKind:
+      type: string
+      enum: [PHOTO, VIDEO_FRAME, DEPTH_MAP, SIGNATURE]
+    MediaSource:
+      type: string
+      enum: [CAMERA, SIMULATED, IMPORTED]
+    RedactionState:
+      type: string
+      enum: [NONE, REQUIRED, APPLIED, NOT_NEEDED]
+    MediaRef:
+      type: object
+      required:
+        - id
+        - kind
+        - sha256
+        - bytes
+        - capturedAt
+        - width
+        - height
+        - redaction
+        - source
+      properties:
+        id:
+          type: string
+        kind:
+          $ref: '#/components/schemas/MediaKind'
+        sha256:
+          $ref: '#/components/schemas/Hash'
+        bytes:
+          type: integer
+          minimum: 0
+        capturedAt:
+          $ref: '#/components/schemas/Timestamp'
+        width:
+          type: integer
+          minimum: 1
+        height:
+          type: integer
+          minimum: 1
+        redaction:
+          $ref: '#/components/schemas/RedactionState'
+        source:
+          $ref: '#/components/schemas/MediaSource'
+        note:
+          type: string
+    RecordKind:
+      type: string
+      enum: [CAPTURE, ATTEST, CUSTODY, INSPECTION, PAYMENT, CORRECTION]
+    Record:
+      type: object
+      required: [seq, kind, at, actorId, summary, payload, prevHash, hash]
+      properties:
+        seq:
+          type: integer
+          minimum: 1
+          description: 1-based and gap-free within a packet.
+        kind:
+          $ref: '#/components/schemas/RecordKind'
+        at:
+          $ref: '#/components/schemas/Timestamp'
+        actorId:
+          type: string
+        summary:
+          type: string
+          maxLength: 300
+        payload:
+          type: object
+          additionalProperties:
+            type: string
+        prevHash:
+          $ref: '#/components/schemas/Hash'
+        hash:
+          $ref: '#/components/schemas/Hash'
+        signatureBase64:
+          type: [string, 'null']
+        signerKeyId:
+          type: [string, 'null']
+    BadgeKey:
+      type: string
+      enum: [STORM_ATTRIBUTION, FIELD_CAPTURED, MEASURED, SCOPE_AGREED, CONSENT_ON_FILE, SETTLED]
+    BadgeState:
+      type: string
+      enum: [MISSING, IN_REVIEW, VERIFIED, FLAGGED, WAIVED]
+    Badge:
+      type: object
+      required: [key, state, required, rationale, evidenceRefs]
+      properties:
+        key:
+          $ref: '#/components/schemas/BadgeKey'
+        state:
+          $ref: '#/components/schemas/BadgeState'
+        required:
+          type: boolean
+        rationale:
+          type: string
+          maxLength: 500
+        evidenceRefs:
+          type: array
+          items:
+            type: string
+    Gate:
+      type: object
+      required: [id, label, passed, detail, blocking]
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        passed:
+          type: boolean
+        detail:
+          type: string
+        blocking:
+          type: boolean
+    Measurement:
+      type: object
+      required:
+        - id
+        - label
+        - meters
+        - referenceLabel
+        - referenceMeters
+        - pixelSpan
+        - calibratedAt
+        - source
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        meters:
+          type: number
+          minimum: 0
+        referenceLabel:
+          type: string
+        referenceMeters:
+          type: number
+          minimum: 0
+        pixelSpan:
+          type: number
+          minimum: 0
+        calibratedAt:
+          $ref: '#/components/schemas/Timestamp'
+        source:
+          $ref: '#/components/schemas/MediaSource'
+        feet:
+          type: number
+          readOnly: true
+    SealState:
+      type: string
+      enum: [PENDING, EARNED, FLAGGED, WITHDRAWN]
+    EvidencePacket:
+      type: object
+      required:
+        - id
+        - jobId
+        - jobType
+        - operatorId
+        - title
+        - requesterLabel
+        - site
+        - badges
+        - tier
+        - seal
+        - records
+        - media
+        - checklist
+        - gates
+        - measurements
+        - notes
+        - demo
+        - createdAt
+        - asOf
+        - merkleProof
+        - shortHash
+        - recordCount
+      properties:
+        id:
+          type: string
+        jobId:
+          type: string
+        jobType:
+          $ref: '#/components/schemas/JobType'
+        operatorId:
+          type: string
+        title:
+          type: string
+        requesterLabel:
+          type: string
+        site:
+          $ref: '#/components/schemas/Site'
+        consent:
+          anyOf:
+            - $ref: '#/components/schemas/Consent'
+            - type: 'null'
+        badges:
+          type: array
+          items:
+            $ref: '#/components/schemas/Badge'
+        tier:
+          type: integer
+          minimum: 1
+          maximum: 5
+          description: Derived evidence tier. 1 Reported through 5 Verified by AUCTUM.
+        tierName:
+          type: string
+          readOnly: true
+          enum: [Reported, Counterparty confirmed, Field captured, Payment verified, Verified by AUCTUM]
+        seal:
+          $ref: '#/components/schemas/SealState'
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/Record'
+        media:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaRef'
+        checklist:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChecklistResult'
+        gates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Gate'
+        measurements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measurement'
+        notes:
+          type: string
+        demo:
+          type: boolean
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+        sealedAt:
+          $ref: '#/components/schemas/NullableTimestamp'
+        merkleLeaf:
+          $ref: '#/components/schemas/HashOrNull'
+        merkleProof:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hash'
+        asOf:
+          $ref: '#/components/schemas/Timestamp'
+        signatureBase64:
+          type: [string, 'null']
+        packetHash:
+          $ref: '#/components/schemas/HashOrNull'
+        shortHash:
+          type: string
+          readOnly: true
+          maxLength: 8
+        recordCount:
+          type: integer
+          readOnly: true
+        version:
+          type: integer
+          readOnly: true
+    PacketSubmission:
+      type: object
+      required:
+        - jobType
+        - operatorId
+        - title
+        - requesterLabel
+        - site
+        - consent
+        - checklist
+        - media
+        - measurements
+        - records
+        - signatureBase64
+        - signerKeyId
+        - asOf
+      properties:
+        jobType:
+          $ref: '#/components/schemas/JobType'
+        operatorId:
+          type: string
+        title:
+          type: string
+        requesterLabel:
+          type: string
+        site:
+          $ref: '#/components/schemas/Site'
+        consent:
+          $ref: '#/components/schemas/Consent'
+        checklist:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChecklistResult'
+        media:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaRef'
+        measurements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measurement'
+        records:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Record'
+        badges:
+          type: array
+          items:
+            $ref: '#/components/schemas/Badge'
+          description: Optional client claims; the server re-derives and rejects mismatches.
+        tier:
+          type: integer
+          minimum: 1
+          maximum: 5
+          description: Optional client claim; the server re-derives and rejects mismatches.
+        seal:
+          $ref: '#/components/schemas/SealState'
+        signatureBase64:
+          type: string
+        signerKeyId:
+          type: string
+        asOf:
+          $ref: '#/components/schemas/Timestamp'
+    PacketReceipt:
+      type: object
+      required: [packetId, packetHash, merkleLeaf, recordCount, uploadedAt, status, anchored]
+      properties:
+        packetId:
+          type: string
+        packetHash:
+          $ref: '#/components/schemas/Hash'
+        merkleLeaf:
+          $ref: '#/components/schemas/Hash'
+        recordCount:
+          type: integer
+        uploadedAt:
+          $ref: '#/components/schemas/Timestamp'
+        status:
+          type: string
+          enum: [SUBMITTED]
+        anchored:
+          type: boolean
+        reason:
+          type: [string, 'null']
+    ChainVerification:
+      type: object
+      required: [valid, entries, brokenAtSeq, headHash, detail]
+      properties:
+        valid:
+          type: boolean
+        entries:
+          type: integer
+        brokenAtSeq:
+          type: [integer, 'null']
+        headHash:
+          $ref: '#/components/schemas/Hash'
+        detail:
+          type: string
+    VerifyReceipt:
+      type: object
+      required: [valid, entries, brokenAtSeq, headHash, detail, signatureValid, signerKeyId, included, verifiedAt]
+      properties:
+        valid:
+          type: boolean
+        entries:
+          type: integer
+        brokenAtSeq:
+          type: [integer, 'null']
+        headHash:
+          $ref: '#/components/schemas/Hash'
+        detail:
+          type: string
+        signatureValid:
+          type: boolean
+        signerKeyId:
+          type: string
+        included:
+          type: boolean
+        verifiedAt:
+          $ref: '#/components/schemas/Timestamp'
+    PacketExport:
+      type: object
+      required: [fileName, canonicalJson, custodyText, chainHead, recordCount]
+      properties:
+        fileName:
+          type: string
+        canonicalJson:
+          type: string
+          description: Canonical serialisation of the sealed packet; hashes reproduce it byte for byte.
+        custodyText:
+          type: string
+        chainHead:
+          $ref: '#/components/schemas/Hash'
+        recordCount:
+          type: integer
+    InclusionProof:
+      type: object
+      required: [leafIndex, treeSize, auditPath, rootHash]
+      properties:
+        leafIndex:
+          type: integer
+          minimum: 0
+        treeSize:
+          type: integer
+          minimum: 1
+        auditPath:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hash'
+        rootHash:
+          $ref: '#/components/schemas/Hash'
+    LogHead:
+      type: object
+      required: [treeSize, rootHash, asOf]
+      properties:
+        treeSize:
+          type: integer
+          minimum: 0
+        rootHash:
+          $ref: '#/components/schemas/Hash'
+        asOf:
+          $ref: '#/components/schemas/Timestamp'
+    AnchorReceipt:
+      type: object
+      required: [packetId, merkleLeaf, logHead, inclusionProof, anchoredAt]
+      properties:
+        packetId:
+          type: string
+        merkleLeaf:
+          $ref: '#/components/schemas/Hash'
+        logHead:
+          $ref: '#/components/schemas/LogHead'
+        inclusionProof:
+          $ref: '#/components/schemas/InclusionProof'
+        anchoredAt:
+          $ref: '#/components/schemas/Timestamp'
+    CorrectionRequest:
+      type: object
+      required: [note, supersedesSeq]
+      properties:
+        note:
+          type: string
+          minLength: 1
+          maxLength: 500
+        supersedesSeq:
+          type: integer
+          minimum: 1
+    LedgerKind:
+      type: string
+      enum: [EARNING, BONUS, TIP, INSTANT_FEE, ADJUSTMENT, REVERSAL]
+    LedgerStatus:
+      type: string
+      enum: [PENDING, AVAILABLE, PAID, REVERSED, FAILED]
+    LedgerEntry:
+      type: object
+      required: [id, kind, amountCents, status, at, description, idempotencyKey, demo]
+      properties:
+        id:
+          type: string
+        jobId:
+          type: [string, 'null']
+        packetId:
+          type: [string, 'null']
+        kind:
+          $ref: '#/components/schemas/LedgerKind'
+        amountCents:
+          $ref: '#/components/schemas/Cents'
+        status:
+          $ref: '#/components/schemas/LedgerStatus'
+        at:
+          $ref: '#/components/schemas/Timestamp'
+        description:
+          type: string
+        idempotencyKey:
+          type: string
+        demo:
+          type: boolean
+    LedgerPage:
+      type: object
+      required: [items, nextCursor, asOf]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LedgerEntry'
+        nextCursor:
+          type: [string, 'null']
+        asOf:
+          $ref: '#/components/schemas/Timestamp'
+    Balances:
+      type: object
+      required:
+        - availableCents
+        - pendingCents
+        - paidLifetimeCents
+        - instantFeePaidLifetimeCents
+        - currentStreakDays
+        - weeklyGoalCents
+      properties:
+        availableCents:
+          $ref: '#/components/schemas/Cents'
+        pendingCents:
+          $ref: '#/components/schemas/Cents'
+        paidLifetimeCents:
+          $ref: '#/components/schemas/Cents'
+        instantFeePaidLifetimeCents:
+          $ref: '#/components/schemas/Cents'
+        currentStreakDays:
+          type: integer
+          minimum: 0
+        weeklyGoalCents:
+          $ref: '#/components/schemas/Cents'
+    EarningsSummary:
+      type: object
+      required:
+        - todayCents
+        - weekCents
+        - monthCents
+        - onlineMinutesToday
+        - jobsCompletedWeek
+        - milesDrivenWeek
+        - bonusesWeekCents
+        - tipsWeekCents
+        - platformFeeWeekCents
+        - mileageDeductionCents
+      properties:
+        todayCents:
+          $ref: '#/components/schemas/Cents'
+        weekCents:
+          $ref: '#/components/schemas/Cents'
+        monthCents:
+          $ref: '#/components/schemas/Cents'
+        onlineMinutesToday:
+          type: integer
+          minimum: 0
+        jobsCompletedWeek:
+          type: integer
+          minimum: 0
+        milesDrivenWeek:
+          type: number
+          minimum: 0
+        bonusesWeekCents:
+          $ref: '#/components/schemas/Cents'
+        tipsWeekCents:
+          $ref: '#/components/schemas/Cents'
+        platformFeeWeekCents:
+          $ref: '#/components/schemas/Cents'
+          description: Requester-paid platform fee disclosed for transparency; never deducted from the worker.
+        mileageDeductionCents:
+          $ref: '#/components/schemas/Cents'
+          description: Estimate only; not tax advice.
+    PayoutMode:
+      type: string
+      enum: [INSTANT, STANDARD]
+    PayoutStatus:
+      type: string
+      enum: [REQUESTED, PROCESSING, PAID, FAILED, CANCELLED]
+    PayoutQuoteRequest:
+      type: object
+      required: [amountCents, mode]
+      properties:
+        amountCents:
+          $ref: '#/components/schemas/Cents'
+        mode:
+          $ref: '#/components/schemas/PayoutMode'
+    PayoutQuote:
+      type: object
+      required: [amountCents, feeCents, netCents, mode, etaLabel, feeDisclosure]
+      properties:
+        amountCents:
+          $ref: '#/components/schemas/Cents'
+        feeCents:
+          $ref: '#/components/schemas/Cents'
+        netCents:
+          $ref: '#/components/schemas/Cents'
+        mode:
+          $ref: '#/components/schemas/PayoutMode'
+        etaLabel:
+          type: string
+        feeDisclosure:
+          type: string
+          description: The exact sentence rendered next to the money. A quote without it is a contract violation.
+    PayoutCreateRequest:
+      type: object
+      required: [amountCents, mode]
+      properties:
+        amountCents:
+          $ref: '#/components/schemas/Cents'
+        mode:
+          $ref: '#/components/schemas/PayoutMode'
+    PayoutRequest:
+      type: object
+      required:
+        - id
+        - amountCents
+        - feeCents
+        - netCents
+        - mode
+        - status
+        - requestedAt
+        - destinationLast4
+        - idempotencyKey
+      properties:
+        id:
+          type: string
+        amountCents:
+          $ref: '#/components/schemas/Cents'
+        feeCents:
+          $ref: '#/components/schemas/Cents'
+        netCents:
+          $ref: '#/components/schemas/Cents'
+        mode:
+          $ref: '#/components/schemas/PayoutMode'
+        status:
+          $ref: '#/components/schemas/PayoutStatus'
+        requestedAt:
+          $ref: '#/components/schemas/Timestamp'
+        completedAt:
+          $ref: '#/components/schemas/NullableTimestamp'
+        destinationLast4:
+          type: string
+          pattern: '^[0-9]{4}$'
+        idempotencyKey:
+          type: string
+        failureReason:
+          type: [string, 'null']
+    PayoutPage:
+      type: object
+      required: [items, nextCursor, asOf]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PayoutRequest'
+        nextCursor:
+          type: [string, 'null']
+        asOf:
+          $ref: '#/components/schemas/Timestamp'
+    SyncEventType:
+      type: string
+      enum:
+        - job.en_route
+        - arrival.confirm
+        - capture.start
+        - packet.submit
+        - correction.append
+        - payout.request
+        - availability.upsert
+        - offer.accept
+        - offer.decline
+    SyncEvent:
+      type: object
+      required: [eventId, idempotencyKey, type, occurredAt]
+      properties:
+        eventId:
+          type: string
+        idempotencyKey:
+          type: string
+          minLength: 8
+          maxLength: 128
+        type:
+          $ref: '#/components/schemas/SyncEventType'
+        aggregateId:
+          type: [string, 'null']
+        occurredAt:
+          $ref: '#/components/schemas/Timestamp'
+        payload:
+          type: object
+          additionalProperties: true
+    SyncBatchRequest:
+      type: object
+      required: [deviceId, sentAt, events]
+      properties:
+        deviceId:
+          type: string
+        sentAt:
+          $ref: '#/components/schemas/Timestamp'
+        events:
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/SyncEvent'
+    SyncEventStatus:
+      type: string
+      enum: [APPLIED, DUPLICATE, REJECTED, RETRY, CONFLICT]
+    SyncEventResult:
+      type: object
+      required: [idempotencyKey, eventId, status]
+      properties:
+        idempotencyKey:
+          type: string
+        eventId:
+          type: string
+        status:
+          $ref: '#/components/schemas/SyncEventStatus'
+        result:
+          type: object
+          additionalProperties: true
+        error:
+          anyOf:
+            - $ref: '#/components/schemas/Error'
+            - type: 'null'
+    SyncBatchResponse:
+      type: object
+      required: [results, serverTime, nextRetryAfterMs]
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SyncEventResult'
+        serverTime:
+          $ref: '#/components/schemas/Timestamp'
+        nextRetryAfterMs:
+          type: [integer, 'null']
+          minimum: 0
+    PacketPage:
+      type: object
+      required: [items, nextCursor, asOf]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvidencePacket'
+        nextCursor:
+          type: [string, 'null']
+        asOf:
+          $ref: '#/components/schemas/Timestamp'

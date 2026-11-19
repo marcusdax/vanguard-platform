@@ -1,0 +1,6 @@
+surface,payer,rate_bps,min_cents,max_cents,milestone,disclosure_copy,staging_note
+vanguard.b2b.bounty,BUYER,1000,0,,VERIFIED_CAPTURE,"Worker receives 100% of stated bounty (0 bps worker fee); includes 10.00% buyer escrow verification fee.","Pre-launch staging: live floor payouts activate upon Stripe Connect settlement switch-on."
+helios.local.b2c,REQUESTER,500,0,,COUNTERPARTY_OR_AR_SCAN,"Worker keeps 100% of task rate (0 bps worker fee); includes 5.00% community escrow fee.","Pre-launch staging: live floor payouts activate upon Stripe Connect settlement switch-on."
+atlas.roofing,CONTRACTOR,250,0,,ESTIMATE_OR_INVOICE,"Includes 2.50% contractor-paid platform fee.",Active
+vanguard.marketplace,REQUESTER,1500,0,,SEALED_PACKET,"Includes 15.00% requester-paid platform fee; zero platform fee taken from worker bounty.","Pre-launch staging: live floor payouts activate upon Stripe Connect settlement switch-on."
+vanguard.instant.payout,WORKER_OPTIONAL,150,50,500,INSTANT_CASHOUT,"Instant payout fee 1.50% (min $0.50, max $5.00). Standard ACH settlement is $0.00.","Pre-launch staging: live floor payouts activate upon Stripe Connect settlement switch-on."

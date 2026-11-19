@@ -1,0 +1,35 @@
+# Android / Gradle
+*.iml
+.gradle/
+local.properties
+.idea/
+.DS_Store
+build/
+captures/
+.externalNativeBuild
+.cxx
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+bin/
+gen/
+out/
+release/
+
+# Keystores and secrets never live in the repository
+*.jks
+*.keystore
+keystore.properties
+
+# Environment
+.env
+.env.*
+
+# Local Robolectric offline cache (exceeds GitHub 100 MB limit)
+.robolectric-deps/
+
+# Embedded AUCTUM.atlas standalone repository (marcusdax/AUCTUM.atlas)
+AUCTUM.atlas/
+

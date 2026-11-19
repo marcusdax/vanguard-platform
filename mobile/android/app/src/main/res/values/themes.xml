@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Fieldwright" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">#EFE6D4</item>
+        <item name="android:statusBarColor">#EFE6D4</item>
+        <item name="android:navigationBarColor">#FFFDF7</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

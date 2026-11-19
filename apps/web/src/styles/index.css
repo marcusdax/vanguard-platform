@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --vg-ground: #0e1116;
+  --vg-surface: #161b22;
+  --vg-elevated: #1e2530;
+  --vg-border: #2b3442;
+  --vg-ink: #e6ecf4;
+  --vg-muted: #94a3b8;
+  --vg-amber: #e09132;
+  --vg-proof: #2fa37a;
+  --vg-linen-ground: #f7f4ed;
+  --vg-linen-ink: #11161c;
+  --vg-linen-emerald: #1f6f54;
+}
+
+html,
+body {
+  background-color: var(--vg-ground);
+  color: var(--vg-ink);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #e09132;
+  color: #0e1116;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Precision focus treatment */
+:where(button, a, input, select, textarea, summary):focus-visible {
+  outline: 2px solid #e09132;
+  outline-offset: 2px;
+}
+
+.surface-community :where(button, a, input, select, textarea):focus-visible {
+  outline: 3px solid #1f6f54;
+  outline-offset: 2px;
+}
+
+/* Mode A Community minimum 64px accessible touch targets */
+.silver-target {
+  min-block-size: 64px;
+}
+
+/* Native <dialog> modal discipline */
+dialog.vanguard-dialog:modal {
+  max-height: calc(100dvh - 2rem);
+  overscroll-behavior: contain;
+  background-color: #161b22;
+  color: #e6ecf4;
+  border: 1px solid #2b3442;
+  border-radius: 14px;
+  padding: 0;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+}
+
+dialog.vanguard-dialog::backdrop {
+  background: rgba(9, 12, 16, 0.78);
+  backdrop-filter: blur(4px);
+  overscroll-behavior: contain;
+}
+
+/* Subtle precision grid texture for Mode B canvases */
+.tactical-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(43, 52, 66, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(43, 52, 66, 0.22) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Themed dark scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0e1116;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2b3442;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
