@@ -1,0 +1,300 @@
+{
+  "analysis": {
+    "column_count": 6,
+    "columns": [
+      {
+        "column_id": "column_bee7f632a2f0e03a",
+        "column_index": 0,
+        "distinct_count_is_lower_bound": false,
+        "distinct_value_count_or_lower_bound": 10,
+        "inferred_kind": "text",
+        "missing_count": 0,
+        "missing_fraction": 0.0,
+        "most_frequent_value_tokens": [
+          {
+            "count": 1,
+            "value_token": "value_080be97ba0a6e0b5"
+          },
+          {
+            "count": 1,
+            "value_token": "value_1e2fde586ba1fb26"
+          },
+          {
+            "count": 1,
+            "value_token": "value_2f6d3a5569a34cd3"
+          },
+          {
+            "count": 1,
+            "value_token": "value_47d329f128ce133a"
+          },
+          {
+            "count": 1,
+            "value_token": "value_7428ea614af04c62"
+          }
+        ],
+        "non_missing_count": 10,
+        "numeric_parse_count": 0,
+        "text_aggregates": {
+          "count": 10,
+          "maximum_character_count": 4,
+          "mean_character_count": 4.0
+        },
+        "text_parse_count": 10
+      },
+      {
+        "column_id": "column_4adaa8e197ee5a1a",
+        "column_index": 1,
+        "distinct_count_is_lower_bound": false,
+        "distinct_value_count_or_lower_bound": 4,
+        "inferred_kind": "text",
+        "missing_count": 0,
+        "missing_fraction": 0.0,
+        "most_frequent_value_tokens": [
+          {
+            "count": 3,
+            "value_token": "value_c7af17bba3c2e79a"
+          },
+          {
+            "count": 3,
+            "value_token": "value_c9fc1de86de7acfd"
+          },
+          {
+            "count": 2,
+            "value_token": "value_67e5022b67dbfaac"
+          },
+          {
+            "count": 2,
+            "value_token": "value_fc3b4fa8f60b02e0"
+          }
+        ],
+        "non_missing_count": 10,
+        "numeric_parse_count": 0,
+        "text_aggregates": {
+          "count": 10,
+          "maximum_character_count": 2,
+          "mean_character_count": 2.0
+        },
+        "text_parse_count": 10
+      },
+      {
+        "column_id": "column_f46b35374878dbe2",
+        "column_index": 2,
+        "distinct_count_is_lower_bound": false,
+        "distinct_value_count_or_lower_bound": 4,
+        "inferred_kind": "text",
+        "missing_count": 0,
+        "missing_fraction": 0.0,
+        "most_frequent_value_tokens": [
+          {
+            "count": 6,
+            "value_token": "value_829d34f7459ed06b"
+          },
+          {
+            "count": 2,
+            "value_token": "value_1b5efce32cf8bccd"
+          },
+          {
+            "count": 1,
+            "value_token": "value_2fb6a0e3647ac684"
+          },
+          {
+            "count": 1,
+            "value_token": "value_bfaf81a0a0cd336c"
+          }
+        ],
+        "non_missing_count": 10,
+        "numeric_parse_count": 0,
+        "text_aggregates": {
+          "count": 10,
+          "maximum_character_count": 19,
+          "mean_character_count": 17.4
+        },
+        "text_parse_count": 10
+      },
+      {
+        "column_id": "column_0046f99bceb0d526",
+        "column_index": 3,
+        "distinct_count_is_lower_bound": false,
+        "distinct_value_count_or_lower_bound": 10,
+        "inferred_kind": "integer",
+        "missing_count": 0,
+        "missing_fraction": 0.0,
+        "most_frequent_value_tokens": [
+          {
+            "count": 1,
+            "value_token": "value_02ee93b56dd4cb29"
+          },
+          {
+            "count": 1,
+            "value_token": "value_14cb6f49bb9eabfe"
+          },
+          {
+            "count": 1,
+            "value_token": "value_3e80b2db73504154"
+          },
+          {
+            "count": 1,
+            "value_token": "value_58db2ce2ae19e23c"
+          },
+          {
+            "count": 1,
+            "value_token": "value_662cbf17a44c1ea3"
+          }
+        ],
+        "non_missing_count": 10,
+        "numeric_aggregates": {
+          "count": 10,
+          "maximum": 15000.0,
+          "mean": 8050.0,
+          "median": 8000.0,
+          "minimum": 1800.0,
+          "q1": 4775.0,
+          "q3": 11250.0,
+          "quantile_sample_count": 10,
+          "quantiles_from_bounded_sample": false,
+          "sample_standard_deviation": 4638.067126149283
+        },
+        "numeric_parse_count": 10,
+        "text_parse_count": 0
+      },
+      {
+        "column_id": "column_d61109be46e45a70",
+        "column_index": 4,
+        "distinct_count_is_lower_bound": false,
+        "distinct_value_count_or_lower_bound": 3,
+        "inferred_kind": "integer",
+        "missing_count": 0,
+        "missing_fraction": 0.0,
+        "most_frequent_value_tokens": [
+          {
+            "count": 4,
+            "value_token": "value_a9065080f34dc675"
+          },
+          {
+            "count": 3,
+            "value_token": "value_4b2dd5566bf1eea4"
+          },
+          {
+            "count": 3,
+            "value_token": "value_d11015b966c44696"
+          }
+        ],
+        "non_missing_count": 10,
+        "numeric_aggregates": {
+          "count": 10,
+          "maximum": 3.0,
+          "mean": 2.1,
+          "median": 2.0,
+          "minimum": 1.0,
+          "q1": 1.25,
+          "q3": 3.0,
+          "quantile_sample_count": 10,
+          "quantiles_from_bounded_sample": false,
+          "sample_standard_deviation": 0.8755950357709131
+        },
+        "numeric_parse_count": 10,
+        "text_parse_count": 0
+      },
+      {
+        "column_id": "column_899d403623b72b29",
+        "column_index": 5,
+        "distinct_count_is_lower_bound": false,
+        "distinct_value_count_or_lower_bound": 1,
+        "inferred_kind": "integer",
+        "missing_count": 0,
+        "missing_fraction": 0.0,
+        "most_frequent_value_tokens": [
+          {
+            "count": 10,
+            "value_token": "value_db52dffbaffbaf49"
+          }
+        ],
+        "non_missing_count": 10,
+        "numeric_aggregates": {
+          "count": 10,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "q1": 0.0,
+          "q3": 0.0,
+          "quantile_sample_count": 10,
+          "quantiles_from_bounded_sample": false,
+          "sample_standard_deviation": 0.0
+        },
+        "numeric_parse_count": 10,
+        "text_parse_count": 0
+      }
+    ],
+    "duplicate_row_count_in_scanned_rows": 0,
+    "duplicate_tracking_truncated": false,
+    "identifier_redaction": "tokenized",
+    "limitations": [
+      "Dtypes are inferred from scanned text and are not a data dictionary.",
+      "Quantiles use a deterministic bounded sample when numeric counts exceed the sample limit.",
+      "Duplicate counts use exact hashes only until the documented tracking cap."
+    ],
+    "missing_code_policy": {
+      "additional_token_count": 0,
+      "empty_or_whitespace_is_missing": true,
+      "tokens_are_not_emitted": true
+    },
+    "profile_type": "tabular_schema_and_aggregate_profile",
+    "raw_values_emitted": false,
+    "row_limit_reached": false,
+    "rows_scanned": 10
+  },
+  "eda_guardrails": {
+    "automatic_deletion": false,
+    "automatic_imputation": false,
+    "automatic_transformation": false,
+    "causal_claims": false,
+    "embedded_text_or_metadata_treated_as_instructions": false,
+    "exploratory_not_confirmatory": true,
+    "full_paths_emitted": false,
+    "raw_input_modified": false,
+    "raw_values_emitted": false,
+    "required_context_not_inferred": [
+      "data dictionary and units",
+      "sampling and experimental design",
+      "subject/sample/group/time structure",
+      "missing-value codes and mechanisms",
+      "censoring and detection limits",
+      "train/validation/test boundaries",
+      "pre-specified hypothesis families and multiplicity plan"
+    ]
+  },
+  "manifest": {
+    "capability": {
+      "dependency": "Python standard library",
+      "depth": "bounded schema, aggregate profile, missingness, and sensitivity audit",
+      "format": "CSV",
+      "reference": "references/general_scientific_formats.md",
+      "suffix": ".csv",
+      "tier": "automated_core"
+    },
+    "file": {
+      "basename": "filename_730bd5e59980faac",
+      "file_id": "file_30b248aa02bc0fd3",
+      "full_path_emitted": false,
+      "regular_file": true,
+      "size_bytes": 442,
+      "symlink": false
+    },
+    "inspection": {
+      "content_values_read": false,
+      "format_signature_checked": false,
+      "reference_only": false
+    },
+    "schema_version": "1.1"
+  },
+  "recommended_next_steps": [
+    "Preserve the raw file read-only and record provenance/checksums separately.",
+    "Confirm the data dictionary, units, design, and missing/censoring codes.",
+    "Run the missingness/leakage and distribution sensitivity CLIs for tabular data.",
+    "Fit imputers, scalers, transformations, and feature selection on training data only.",
+    "Label generated hypotheses as exploratory and confirm them on independent data."
+  ],
+  "report_type": "bounded_exploratory_data_analysis",
+  "schema_version": "1.1"
+}

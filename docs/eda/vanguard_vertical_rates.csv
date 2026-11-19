@@ -1,0 +1,11 @@
+code,tier_group,surface,default_bounty_cents,required_tier,worker_fee_bps
+V-0A,T0,helios.local.b2c,1800,1,0
+V-0B,T0,helios.local.b2c,4200,1,0
+V-01,T1,atlas.roofing,2000,1,0
+V-02,T1,vanguard.b2b.bounty,6500,3,0
+V-03,T1,vanguard.b2b.bounty,7500,2,0
+V-04,T2,vanguard.b2b.bounty,12000,3,0
+V-05,T2,vanguard.b2b.bounty,8500,2,0
+V-06,T2,vanguard.b2b.bounty,15000,3,0
+V-07,T3,vanguard.b2b.bounty,14000,3,0
+V-08,T3,supply.standard,9000,2,0

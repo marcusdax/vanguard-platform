@@ -1,0 +1,1618 @@
+{
+  "total_dois": 3,
+  "verified": [
+    "10.17487/rfc6962",
+    "10.1038/s41598-025-04566-4",
+    "10.3389/fbloc.2025.1644115"
+  ],
+  "failed": [],
+  "metadata_unavailable": [],
+  "metadata": {
+    "10.17487/rfc6962": {
+      "metadata_status": "retrieved",
+      "title": "Certificate Transparency",
+      "authors": "Laurie, B.; Langley, A.; Kasper, E.",
+      "author": [
+        {
+          "given": "B.",
+          "family": "Laurie",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "A.",
+          "family": "Langley",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "E.",
+          "family": "Kasper",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "year": "2013",
+      "journal": "",
+      "volume": "",
+      "issue": "",
+      "pages": "",
+      "doi": "10.17487/rfc6962",
+      "crossref_message": {
+        "indexed": {
+          "date-parts": [
+            [
+              2026,
+              11,
+              19
+            ]
+          ],
+          "date-time": "2026-11-19T00:16:05Z",
+          "timestamp": 1795047365459,
+          "version": "4.10.2"
+        },
+        "reference-count": 0,
+        "publisher": "RFC Editor",
+        "content-domain": {
+          "domain": [],
+          "crossmark-restriction": false
+        },
+        "short-container-title": [],
+        "DOI": "10.17487/rfc6962",
+        "type": "report",
+        "created": {
+          "date-parts": [
+            [
+              2015,
+              4,
+              11
+            ]
+          ],
+          "date-time": "2015-04-11T20:46:27Z",
+          "timestamp": 1428785187000
+        },
+        "source": "Crossref",
+        "is-referenced-by-count": 310,
+        "title": [
+          "Certificate Transparency"
+        ],
+        "prefix": "10.17487",
+        "author": [
+          {
+            "given": "B.",
+            "family": "Laurie",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "A.",
+            "family": "Langley",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "E.",
+            "family": "Kasper",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "member": "7045",
+        "published-online": {
+          "date-parts": [
+            [
+              2013,
+              6
+            ]
+          ]
+        },
+        "container-title": [],
+        "original-title": [],
+        "deposited": {
+          "date-parts": [
+            [
+              2015,
+              4,
+              11
+            ]
+          ],
+          "date-time": "2015-04-11T20:50:26Z",
+          "timestamp": 1428785426000
+        },
+        "score": 1,
+        "resource": {
+          "primary": {
+            "URL": "https://www.rfc-editor.org/info/rfc6962"
+          }
+        },
+        "subtitle": [],
+        "short-title": [],
+        "issued": {
+          "date-parts": [
+            [
+              2013,
+              6
+            ]
+          ]
+        },
+        "references-count": 0,
+        "URL": "https://doi.org/10.17487/rfc6962",
+        "relation": {},
+        "subject": [],
+        "published": {
+          "date-parts": [
+            [
+              2013,
+              6
+            ]
+          ]
+        }
+      },
+      "status": "registered"
+    },
+    "10.1038/s41598-025-04566-4": {
+      "metadata_status": "retrieved",
+      "title": "Decentralized Proof-of-Location systems for trust, scalability, and privacy in digital societies",
+      "authors": "Brito, Eduardo; Hadachi, Amnir; Kamm, Liina; Norbisrath, Ulrich",
+      "author": [
+        {
+          "given": "Eduardo",
+          "family": "Brito",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Amnir",
+          "family": "Hadachi",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Liina",
+          "family": "Kamm",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Ulrich",
+          "family": "Norbisrath",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "year": "2025",
+      "journal": "Scientific Reports",
+      "volume": "15",
+      "issue": "1",
+      "pages": "",
+      "doi": "10.1038/s41598-025-04566-4",
+      "crossref_message": {
+        "indexed": {
+          "date-parts": [
+            [
+              2026,
+              11,
+              13
+            ]
+          ],
+          "date-time": "2026-11-13T17:56:05Z",
+          "timestamp": 1794592565996,
+          "version": "4.9.1"
+        },
+        "reference-count": 77,
+        "publisher": "Springer Science and Business Media LLC",
+        "issue": "1",
+        "license": [
+          {
+            "start": {
+              "date-parts": [
+                [
+                  2025,
+                  6,
+                  5
+                ]
+              ],
+              "date-time": "2025-06-05T00:00:00Z",
+              "timestamp": 1749081600000
+            },
+            "content-version": "tdm",
+            "delay-in-days": 0,
+            "URL": "https://creativecommons.org/licenses/by/4.0"
+          },
+          {
+            "start": {
+              "date-parts": [
+                [
+                  2025,
+                  6,
+                  5
+                ]
+              ],
+              "date-time": "2025-06-05T00:00:00Z",
+              "timestamp": 1749081600000
+            },
+            "content-version": "vor",
+            "delay-in-days": 0,
+            "URL": "https://creativecommons.org/licenses/by/4.0"
+          }
+        ],
+        "content-domain": {
+          "domain": [
+            "link.springer.com"
+          ],
+          "crossmark-restriction": false
+        },
+        "short-container-title": [
+          "Sci Rep"
+        ],
+        "abstract": "<jats:title>Abstract</jats:title>\n          <jats:p>Verifying physical presence in digital systems is essential for secure authentication, authorization, and accountability. Proof-of-Location (PoL) systems address this need by enabling verifiable, tamper-resistant claims of location and time, particularly in adversarial environments where traditional localization methods such as GPS fall short. While recent efforts have explored decentralized PoL architectures, existing systems often lack a unified model that integrates spatio-temporal synchronization, distributed consensus, and cryptographic attestation. In this paper, we formalize the architectural foundations of decentralized PoL systems by introducing a composable model based on fault-tolerant witnessing zones. We define core components for synchronization and collective attestation, integrating primitives such as distributed digital signatures, distance bounding protocols, and consensus mechanisms. We contextualize the model across diverse application domains that necessitate digital trust-such as civic processes, content authentication, infrastructure auditing, and supply chain tracking-and argue for a shared, interoperable decentralized PoL infrastructure. To validate our design, we implement and emulate a reference protocol instance, analysing scalability, synchronization behaviour, and timing misalignment under varied conditions. We also outline its security model and discuss limitations and future directions in privacy, interoperability, and real-world deployment. Our contributions lay a formal and practical foundation for scalable, secure, and general-purpose decentralized PoL systems.</jats:p>",
+        "DOI": "10.1038/s41598-025-04566-4",
+        "type": "journal-article",
+        "created": {
+          "date-parts": [
+            [
+              2025,
+              6,
+              5
+            ]
+          ],
+          "date-time": "2025-06-05T12:48:03Z",
+          "timestamp": 1749127683000
+        },
+        "update-policy": "https://doi.org/10.1007/springer_crossmark_policy",
+        "source": "Crossref",
+        "is-referenced-by-count": 10,
+        "title": [
+          "Decentralized Proof-of-Location systems for trust, scalability, and privacy in digital societies"
+        ],
+        "prefix": "10.1038",
+        "volume": "15",
+        "author": [
+          {
+            "given": "Eduardo",
+            "family": "Brito",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Amnir",
+            "family": "Hadachi",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Liina",
+            "family": "Kamm",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Ulrich",
+            "family": "Norbisrath",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "member": "297",
+        "published-online": {
+          "date-parts": [
+            [
+              2025,
+              6,
+              5
+            ]
+          ]
+        },
+        "reference": [
+          {
+            "key": "4566_CR1",
+            "unstructured": "Waters, B. & Felten, E. Secure, private proofs of location. Department of Computer Science, Princeton University, Tech. Rep. TR-667-03 (2003)."
+          },
+          {
+            "key": "4566_CR2",
+            "doi-asserted-by": "publisher",
+            "first-page": "221",
+            "DOI": "10.1109/JSAC.2005.861380",
+            "volume": "24",
+            "author": "S Capkun",
+            "year": "2006",
+            "unstructured": "Capkun, S. & Hubaux, J.-P. Secure positioning in wireless networks. IEEE Journal on Selected Areas in Communications 24, 221\u2013232 (2006).",
+            "journal-title": "IEEE Journal on Selected Areas in Communications"
+          },
+          {
+            "key": "4566_CR3",
+            "unstructured": "Akand, M.\u00a0R., Safavi-Naini, R., Kneppers, M., Giraud, M. & Lafourcade, P. Privacy-preserving proof-of-location with security against geo-tampering. IEEE Transactions on Dependable and Secure Computing (2021)."
+          },
+          {
+            "key": "4566_CR4",
+            "unstructured": "King, R.\u00a0J. Foam: The importance of time synchronization. https://blog.foam.space/foam-the-importance-of-time-synchronization-3934755ccc4e (2020). Accessed: 2024-11-02."
+          },
+          {
+            "key": "4566_CR5",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Chandran, N., Goyal, V., Moriarty, R. & Ostrovsky, R. Position based cryptography. In Annual International Cryptology Conference, 391\u2013407 (Springer, 2009).",
+            "DOI": "10.1007/978-3-642-03356-8_23"
+          },
+          {
+            "key": "4566_CR6",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Saroiu, S. & Wolman, A. Enabling new mobile applications with location proofs. In Proceedings of the 10th workshop on Mobile Computing Systems and Applications, 1\u20136 (2009).",
+            "DOI": "10.1145/1514411.1514414"
+          },
+          {
+            "key": "4566_CR7",
+            "doi-asserted-by": "publisher",
+            "first-page": "22",
+            "DOI": "10.1145/3137597.3137600",
+            "volume": "19",
+            "author": "K Shu",
+            "year": "2017",
+            "unstructured": "Shu, K., Sliva, A., Wang, S., Tang, J. & Liu, H. Fake news detection on social media: A data mining perspective. ACM SIGKDD explorations newsletter 19, 22\u201336 (2017).",
+            "journal-title": "ACM SIGKDD explorations newsletter"
+          },
+          {
+            "key": "4566_CR8",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Yang, Z. et al. Group time-based one-time passwords and its application to efficient privacy-preserving proof of location. In Annual Computer Security Applications Conference, 497\u2013512 (2021).",
+            "DOI": "10.1145/3485832.3488009"
+          },
+          {
+            "key": "4566_CR9",
+            "volume-title": "The philosophy of space and time",
+            "author": "H Reichenbach",
+            "year": "2012",
+            "unstructured": "Reichenbach, H. The philosophy of space and time (Courier Corporation, North Chelmsford, Massachusetts, USA, 2012)."
+          },
+          {
+            "key": "4566_CR10",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Dupin, A., Robert, J.-M. & Bidan, C. Location-proof system based on secure multi-party computations. In Provable Security: 12th International Conference, ProvSec 2018, Jeju, South Korea, October 25-28, 2018, Proceedings, 22\u201339 (Springer, 2018).",
+            "DOI": "10.1007/978-3-030-01446-9_2"
+          },
+          {
+            "key": "4566_CR11",
+            "volume-title": "Einstein\u2019s clocks and Poincar\u00e9\u2019s maps: empires of time",
+            "author": "P Galison",
+            "year": "2004",
+            "unstructured": "Galison, P. Einstein\u2019s clocks and Poincar\u00e9\u2019s maps: empires of time (WW Norton & Company, New York, USA, 2004)."
+          },
+          {
+            "key": "4566_CR12",
+            "volume-title": "Spacetime physics",
+            "author": "EF Taylor",
+            "year": "1992",
+            "unstructured": "Taylor, E. F. & Wheeler, J. A. Spacetime physics (Macmillan, London, UK, 1992)."
+          },
+          {
+            "key": "4566_CR13",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Amoretti, M., Brambilla, G., Medioli, F. & Zanichelli, F. Blockchain-based proof of location. In 2018 IEEE International Conference on Software Quality, Reliability and Security Companion (QRS-C), 146\u2013153 (IEEE, 2018).",
+            "DOI": "10.1109/QRS-C.2018.00038"
+          },
+          {
+            "key": "4566_CR14",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Nasrulin, B., Muzammal, M. & Qu, Q. A robust spatio-temporal verification protocol for blockchain. In Web Information Systems Engineering\u2013WISE 2018: 19th International Conference, Dubai, United Arab Emirates, November 12-15, 2018, Proceedings, Part I 19, 52\u201367 (Springer International Publishing, 2018).",
+            "DOI": "10.1007/978-3-030-02922-7_4"
+          },
+          {
+            "key": "4566_CR15",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Graham, M. & Gray, D. Protecting privacy and securing the gathering of location proofs-the secure location verification proof gathering protocol. In MobiSec, 160\u2013171 (Springer, 2009).",
+            "DOI": "10.1007/978-3-642-04434-2_14"
+          },
+          {
+            "key": "4566_CR16",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Luo, W. & Hengartner, U. Veriplace: a privacy-aware location proof architecture. In Proceedings of the 18th SIGSPATIAL International Conference on Advances in Geographic Information Systems, 23\u201332 (2010).",
+            "DOI": "10.1145/1869790.1869797"
+          },
+          {
+            "key": "4566_CR17",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Javali, C., Revadigar, G., Rasmussen, K.\u00a0B., Hu, W. & Jha, S. I am alice, i was in wonderland: secure location proof generation and verification protocol. In 2016 IEEE 41st conference on local computer networks (LCN), 477\u2013485 (IEEE, 2016).",
+            "DOI": "10.1109/LCN.2016.126"
+          },
+          {
+            "key": "4566_CR18",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Zhu, Z. & Cao, G. Applaus: A privacy-preserving location proof updating system for location-based services. In 2011 Proceedings IEEE INFOCOM, 1889\u20131897 (IEEE, 2011).",
+            "DOI": "10.1109/INFCOM.2011.5934991"
+          },
+          {
+            "key": "4566_CR19",
+            "doi-asserted-by": "publisher",
+            "first-page": "3276",
+            "DOI": "10.1109/TNET.2016.2515119",
+            "volume": "24",
+            "author": "X Wang",
+            "year": "2016",
+            "unstructured": "Wang, X., Pande, A., Zhu, J. & Mohapatra, P. Stamp: Enabling privacy-preserving location proofs for mobile users. IEEE ACM Trans. Netw. 24, 3276\u20133289 (2016).",
+            "journal-title": "IEEE ACM Trans. Netw."
+          },
+          {
+            "key": "4566_CR20",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Gambs, S., Killijian, M.-O., Roy, M. & Traor\u00e9, M. Props: A privacy-preserving location proof system. In 2014 IEEE 33rd International Symposium on Reliable Distributed Systems, 1\u201310 (IEEE, 2014).",
+            "DOI": "10.1109/SRDS.2014.37"
+          },
+          {
+            "key": "4566_CR21",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Nosouhi, M.\u00a0R., Yu, S., Grobler, M., Xiang, Y. & Zhu, Z. Sparse: privacy-aware and collusion resistant location proof generation and verification. In 2018 IEEE Global Communications Conference (GLOBECOM), 1\u20136 (IEEE, 2018).",
+            "DOI": "10.1109/GLOCOM.2018.8647933"
+          },
+          {
+            "key": "4566_CR22",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Wu, W., Liu, E., Gong, X. & Wang, R. Blockchain based zero-knowledge proof of location in iot. In ICC 2020-2020 IEEE International Conference on Communications (ICC), 1\u20137 (IEEE, 2020).",
+            "DOI": "10.1109/ICC40277.2020.9149366"
+          },
+          {
+            "key": "4566_CR23",
+            "doi-asserted-by": "publisher",
+            "first-page": "40",
+            "DOI": "10.1016/j.jpdc.2019.10.007",
+            "volume": "136",
+            "author": "MR Nosouhi",
+            "year": "2020",
+            "unstructured": "Nosouhi, M. R., Yu, S., Zhou, W., Grobler, M. & Keshtiar, H. Blockchain for secure location verification. J. Parallel Distrib. Comput. 136, 40\u201351 (2020).",
+            "journal-title": "J. Parallel Distrib. Comput."
+          },
+          {
+            "key": "4566_CR24",
+            "unstructured": "Corp, F. Foam whitepaper. https://foam.space/publicAssets/FOAM_Whitepaper.pdf. Accessed: 2025-01-02."
+          },
+          {
+            "key": "4566_CR25",
+            "doi-asserted-by": "publisher",
+            "first-page": "160",
+            "DOI": "10.1016/j.jpdc.2020.06.015",
+            "volume": "145",
+            "author": "E Pournaras",
+            "year": "2020",
+            "unstructured": "Pournaras, E. Proof of witness presence: Blockchain consensus for augmented democracy in smart cities. J. Parallel Distrib. Comput. 145, 160\u2013175 (2020).",
+            "journal-title": "J. Parallel Distrib. Comput."
+          },
+          {
+            "key": "4566_CR26",
+            "doi-asserted-by": "publisher",
+            "first-page": "181733",
+            "DOI": "10.1109/ACCESS.2020.3028189",
+            "volume": "8",
+            "author": "W Li",
+            "year": "2020",
+            "unstructured": "Li, W., Guo, H., Nejad, M. & Shen, C.-C. Privacy-preserving traffic management: A blockchain and zero-knowledge proof inspired approach. IEEE Access 8, 181733\u2013181743 (2020).",
+            "journal-title": "IEEE Access"
+          },
+          {
+            "key": "4566_CR27",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Hancock, J.\u00a0T. & Bailenson, J.\u00a0N. The social impact of deepfakes (2021).",
+            "DOI": "10.1089/cyber.2021.29208.jth"
+          },
+          {
+            "key": "4566_CR28",
+            "unstructured": "Agarwal, S. et al. Protecting world leaders against deep fakes. In CVPR workshops, 1, 38 (2019)."
+          },
+          {
+            "key": "4566_CR29",
+            "doi-asserted-by": "publisher",
+            "first-page": "1",
+            "DOI": "10.1145/3395046",
+            "volume": "53",
+            "author": "X Zhou",
+            "year": "2020",
+            "unstructured": "Zhou, X. & Zafarani, R. A survey of fake news: Fundamental theories, detection methods, and opportunities. ACM Computing Surveys (CSUR) 53, 1\u201340 (2020).",
+            "journal-title": "ACM Computing Surveys (CSUR)"
+          },
+          {
+            "key": "4566_CR30",
+            "doi-asserted-by": "publisher",
+            "first-page": "1776",
+            "DOI": "10.3390/electronics9111776",
+            "volume": "9",
+            "author": "F Zafar",
+            "year": "2020",
+            "unstructured": "Zafar, F., Khan, A., Anjum, A., Maple, C. & Shah, M. A. Location proof systems for smart internet of things: Requirements, taxonomy, and comparative analysis. Electronics 9, 1776 (2020).",
+            "journal-title": "Electronics"
+          },
+          {
+            "key": "4566_CR31",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Kaushik, V. & Suhas, P. Fool proof ticketing system for public transport. In 2018 3rd International Conference on Communication and Electronics Systems (ICCES), 56\u201360 (IEEE, 2018).",
+            "DOI": "10.1109/CESYS.2018.8723982"
+          },
+          {
+            "key": "4566_CR32",
+            "doi-asserted-by": "publisher",
+            "first-page": "3548",
+            "DOI": "10.1109/JSAC.2023.3310094",
+            "volume": "41",
+            "author": "J Guo",
+            "year": "2023",
+            "unstructured": "Guo, J. et al. Tfl-dt: A trust evaluation scheme for federated learning in digital twin for mobile networks. IEEE J. Sel. Areas Commun. 41, 3548\u20133560 (2023).",
+            "journal-title": "IEEE J. Sel. Areas Commun."
+          },
+          {
+            "key": "4566_CR33",
+            "doi-asserted-by": "publisher",
+            "first-page": "2144",
+            "DOI": "10.1109/TITS.2021.3136304",
+            "volume": "24",
+            "author": "Z Liu",
+            "year": "2021",
+            "unstructured": "Liu, Z. et al. Lightweight trustworthy message exchange in unmanned aerial vehicle networks. IEEE trans. Intell. Transp. Syst. 24, 2144\u20132157 (2021).",
+            "journal-title": "IEEE trans. Intell. Transp. Syst."
+          },
+          {
+            "key": "4566_CR34",
+            "doi-asserted-by": "publisher",
+            "first-page": "4028",
+            "DOI": "10.1109/JIOT.2019.2957520",
+            "volume": "7",
+            "author": "Z Liu",
+            "year": "2019",
+            "unstructured": "Liu, Z. et al. Tcemd: A trust cascading-based emergency message dissemination model in vanets. IEEE Internet Things J. 7, 4028\u20134048 (2019).",
+            "journal-title": "IEEE Internet Things J."
+          },
+          {
+            "key": "4566_CR35",
+            "doi-asserted-by": "publisher",
+            "first-page": "98",
+            "DOI": "10.1016/j.comcom.2019.07.024",
+            "volume": "147",
+            "author": "F Boeira",
+            "year": "2019",
+            "unstructured": "Boeira, F., Asplund, M. & Barcellos, M. Decentralized proof of location in vehicular ad hoc networks. Computer Communications 147, 98\u2013110 (2019).",
+            "journal-title": "Computer Communications"
+          },
+          {
+            "key": "4566_CR36",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Li, W., Meese, C., Zhong, Z.\u00a0G., Guo, H. & Nejad, M. Location-aware verification for autonomous truck platooning based on blockchain and zero-knowledge proof. In 2021 IEEE International Conference on Blockchain and Cryptocurrency (ICBC), 1\u20135 (IEEE, 2021).",
+            "DOI": "10.1109/ICBC51069.2021.9461116"
+          },
+          {
+            "key": "4566_CR37",
+            "doi-asserted-by": "publisher",
+            "first-page": "99",
+            "DOI": "10.3390/fi11040099",
+            "volume": "11",
+            "author": "A Cilfone",
+            "year": "2019",
+            "unstructured": "Cilfone, A., Davoli, L., Belli, L. & Ferrari, G. Wireless mesh networking: An iot-oriented perspective survey on relevant technologies. Future Internet 11, 99 (2019).",
+            "journal-title": "Future Internet"
+          },
+          {
+            "key": "4566_CR38",
+            "unstructured": "Sichitiu, M.\u00a0L. Wireless mesh networks: opportunities and challenges. In Proceedings of World Wireless Congress, vol.\u00a02, 21 (2005)."
+          },
+          {
+            "key": "4566_CR39",
+            "doi-asserted-by": "publisher",
+            "first-page": "1432",
+            "DOI": "10.1109/COMST.2020.2969706",
+            "volume": "22",
+            "author": "Y Xiao",
+            "year": "2020",
+            "unstructured": "Xiao, Y., Zhang, N., Lou, W. & Hou, Y. T. A survey of distributed consensus protocols for blockchain networks. IEEE Commun. Surv. Tutorials 22, 1432\u20131465. https://doi.org/10.1109/COMST.2020.2969706 (2020).",
+            "journal-title": "IEEE Commun. Surv. Tutorials"
+          },
+          {
+            "key": "4566_CR40",
+            "unstructured": "Castro, M., Liskov, B. et al. Practical byzantine fault tolerance. In OsDI, 173\u2013186 (1999)."
+          },
+          {
+            "key": "4566_CR41",
+            "first-page": "40",
+            "volume": "25",
+            "author": "Y Xiao",
+            "year": "2019",
+            "unstructured": "Xiao, Y., Zhang, N., Li, J., Lou, W. & Hou, Y. T. Distributed consensus protocols and algorithms. Blockchain for Distributed Syst. Secur. 25, 40 (2019).",
+            "journal-title": "Blockchain for Distributed Syst. Secur."
+          },
+          {
+            "key": "4566_CR42",
+            "unstructured": "Buterin, V. et al. A next-generation smart contract and decentralized application platform. white paper 3, 2\u20131 (2014)."
+          },
+          {
+            "key": "4566_CR43",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Malekpour, M.\u00a0R. A self-stabilizing hybrid fault-tolerant synchronization protocol. In 2015 IEEE Aerospace Conference, 1\u201311 (IEEE, 2015).",
+            "DOI": "10.1109/AERO.2015.7119170"
+          },
+          {
+            "key": "4566_CR44",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.6028/NIST.IR.8214",
+            "author": "LT Brandao",
+            "year": "2019",
+            "unstructured": "Brandao, L. T., Mouha, N. W. & Vassilev, A. T. Threshold schemes for cryptographic primitives. Natl. Inst. StandardsTechnol. https://doi.org/10.6028/NIST.IR.8214 (2019).",
+            "journal-title": "Natl. Inst. StandardsTechnol."
+          },
+          {
+            "key": "4566_CR45",
+            "unstructured": "Alexandru, A. Secure localization literature review. Not peer-reviewed (2021). Contains a list of peer-reviewed work on secure localization techniques."
+          },
+          {
+            "key": "4566_CR46",
+            "unstructured": "Akand, M. M.\u00a0R. Contribution to Proof-of-Location Systems. Ph.D. thesis, University of Calgary, Alberta, Canada (2023)."
+          },
+          {
+            "key": "4566_CR47",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Chiang, J.\u00a0T., Haas, J.\u00a0J. & Hu, Y.-C. Secure and precise location verification using distance bounding and simultaneous multilateration. In Proceedings of the second ACM conference on Wireless network security, 181\u2013192 (2009).",
+            "DOI": "10.1145/1514274.1514301"
+          },
+          {
+            "key": "4566_CR48",
+            "doi-asserted-by": "publisher",
+            "first-page": "2926",
+            "DOI": "10.1109/COMST.2016.2590438",
+            "volume": "18",
+            "author": "M L\u00e9vesque",
+            "year": "2016",
+            "unstructured": "L\u00e9vesque, M. & Tipper, D. A survey of clock synchronization over packet-switched networks. IEEE Commun. Surv. Tutorials 18, 2926\u20132947. https://doi.org/10.1109/COMST.2016.2590438 (2016).",
+            "journal-title": "IEEE Commun. Surv. Tutorials"
+          },
+          {
+            "key": "4566_CR49",
+            "first-page": "205",
+            "volume": "4",
+            "author": "K Balakrishnan",
+            "year": "2023",
+            "unstructured": "Balakrishnan, K., Dhanalakshmi, R., Sinha, B. B. & Gopalakrishnan, R. Clock synchronization in industrial internet of things and potential works in precision time protocol: Review, challenges and future directions. Int. J. Cogn. Comput. Eng. 4, 205\u2013219 (2023).",
+            "journal-title": "Int. J. Cogn. Comput. Eng."
+          },
+          {
+            "key": "4566_CR50",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Konashevych, O. & Poblet, M. Blockchain anchoring of public registries: Options and challenges. In Proceedings of the 12th International Conference on Theory and Practice of Electronic Governance, 317\u2013323 (2019).",
+            "DOI": "10.1145/3326365.3326406"
+          },
+          {
+            "key": "4566_CR51",
+            "doi-asserted-by": "publisher",
+            "first-page": "26",
+            "DOI": "10.1007/s41651-020-00066-3",
+            "volume": "4",
+            "author": "M Li",
+            "year": "2020",
+            "unstructured": "Li, M. & Stefanakis, E. Geospatial operations of discrete global grid systems-a comparison with traditional gis. Journal of Geovisualization and Spatial Analysis 4, 26 (2020).",
+            "journal-title": "Journal of Geovisualization and Spatial Analysis"
+          },
+          {
+            "key": "4566_CR52",
+            "doi-asserted-by": "publisher",
+            "first-page": "7",
+            "DOI": "10.5194/isprs-annals-IV-4-W2-7-2017",
+            "volume": "4",
+            "author": "R Deiotte",
+            "year": "2017",
+            "unstructured": "Deiotte, R. & La Valley, R. Comparison of spatiotemporal mapping techniques for enormous etl and exploitation patterns. ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences 4, 7\u201313 (2017).",
+            "journal-title": "ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences"
+          },
+          {
+            "key": "4566_CR53",
+            "unstructured": "Ernstberger, J., Zhang, C., Ciprian, L., Jovanovic, P. & Steinhorst, S. Zero-knowledge location privacy via accurate floating point snarks. arXiv preprint arXiv:2404.14983 (2024)."
+          },
+          {
+            "key": "4566_CR54",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Sahr, K. Central place indexing: Hierarchical linear indexing systems for mixed-aperture hexagonal discrete global grid systems. Cartographica: The International Journal for Geographic Information and Geovisualization 54, 16\u201329 (2019).",
+            "DOI": "10.3138/cart.54.1.2018-0022"
+          },
+          {
+            "key": "4566_CR55",
+            "volume-title": "Understanding PKI: concepts, standards, and deployment considerations",
+            "author": "C Adams",
+            "year": "2003",
+            "unstructured": "Adams, C. & Lloyd, S. Understanding PKI: concepts, standards, and deployment considerations (Addison-Wesley Professional, Boston, Massachusetts, USA, 2003)."
+          },
+          {
+            "key": "4566_CR56",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1201/9781003425298",
+            "volume-title": "Security without Obscurity: A Guide to PKI Operations",
+            "author": "J Stapleton",
+            "year": "2024",
+            "unstructured": "Stapleton, J. & Epstein, W. C. Security without Obscurity: A Guide to PKI Operations (CRC Press, Boca Raton, Florida, USA, 2024)."
+          },
+          {
+            "key": "4566_CR57",
+            "unstructured": "Al-Khouri, A.\u00a0M. Pki in government digital identity management systems. European Journal of ePractice 4 (2012)."
+          },
+          {
+            "key": "4566_CR58",
+            "unstructured": "Wilson, S. The importance of pki today. China Communications (2005)."
+          },
+          {
+            "key": "4566_CR59",
+            "unstructured": "Ernstberger, J., Chaliasos, S., Zhou, L., Jovanovic, P. & Gervais, A. Do you need a zero knowledge proof? Cryptology ePrint Archive (2024)."
+          },
+          {
+            "key": "4566_CR60",
+            "doi-asserted-by": "publisher",
+            "first-page": "445",
+            "DOI": "10.1016/j.comnet.2004.12.001",
+            "volume": "47",
+            "author": "IF Akyildiz",
+            "year": "2005",
+            "unstructured": "Akyildiz, I. F., Wang, X. & Wang, W. Wireless mesh networks: a survey. Computer networks 47, 445\u2013487 (2005).",
+            "journal-title": "Computer networks"
+          },
+          {
+            "key": "4566_CR61",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Hiertz, G.\u00a0R. et al. Ieee 802.11 s: the wlan mesh standard. IEEE Wireless Communications 17, 104\u2013111 (2010).",
+            "DOI": "10.1109/MWC.2010.5416357"
+          },
+          {
+            "key": "4566_CR62",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Bari, S., Anwar, F. & Masud, M. Performance study of hybrid wireless mesh protocol (hwmp) for ieee 802.11 s wlan mesh networks. In 2012 international conference on computer and communication engineering (ICCCE), 712\u2013716 (IEEE, 2012).",
+            "DOI": "10.1109/ICCCE.2012.6271309"
+          },
+          {
+            "key": "4566_CR63",
+            "unstructured": "Open-Mesh. B.a.t.m.a.n. v. https://www.open-mesh.org/projects/batman-adv/wiki/BATMAN_V. Accessed: 2024-12-21."
+          },
+          {
+            "key": "4566_CR64",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Seither, D., K\u00f6nig, A. & Hollick, M. Routing performance of wireless mesh networks: A practical evaluation of batman advanced. In 2011 IEEE 36th Conference on Local Computer Networks, 897\u2013904 (IEEE, 2011).",
+            "DOI": "10.1109/LCN.2011.6115569"
+          },
+          {
+            "key": "4566_CR65",
+            "unstructured": "SIG, B. Bluetooth mesh protocol 1.1. https://www.bluetooth.org/DocMan/handlers/DownloadDoc.ashx?doc_id=574298 (2024). Adopted Bluetooth specification defining fundamental requirements for an interoperable mesh networking solution for Bluetooth low energy wireless technology."
+          },
+          {
+            "key": "4566_CR66",
+            "unstructured": "Martin Woolley, B.\u00a0S. Bluetooth channel sounding technical overview (2024). Bluetooth Channel Sounding Technical Overview by Martin Woolley, Bluetooth SIG."
+          },
+          {
+            "key": "4566_CR67",
+            "unstructured": "Akand, M. M.\u00a0R. In-region Location Verification Using Distance Bounding. Ph.D. thesis, MS thesis. Graduate Studies (2016)."
+          },
+          {
+            "key": "4566_CR68",
+            "unstructured": "Rasmussen, K.\u00a0B. & Capkun, S. Realization of $$\\{$$RF$$\\}$$ distance bounding. In 19th USENIX Security Symposium (USENIX Security 10) (2010)."
+          },
+          {
+            "key": "4566_CR69",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Capkun, S., El Defrawy, K. & Tsudik, G. Group distance bounding protocols: (short paper). In Trust and Trustworthy Computing: 4th International Conference, TRUST 2011, Pittsburgh, PA, USA, June 22-24, 2011. Proceedings 4, 302\u2013312 (Springer, 2011).",
+            "DOI": "10.1007/978-3-642-21599-5_23"
+          },
+          {
+            "key": "4566_CR70",
+            "unstructured": "The Coalition for Content Provenance and Authenticity (C2PA). The coalition for content provenance and authenticity (c2pa). https://c2pa.org/ (2022). Accessed on 2025-05-16."
+          },
+          {
+            "key": "4566_CR71",
+            "unstructured": "Castillo, F., Castillo, O., Brito, E. & Espinola, S. Trustworthy decentralized autonomous machines: A new paradigm in automation economy. arXiv preprint arXiv:2504.15676 (2025)."
+          },
+          {
+            "key": "4566_CR72",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Brito, E., Castillo, F., Pullonen-Raudvere, P. & Werner, S. Trustops: Continuously building trustworthy software. In International Conference on Enterprise Design, Operations, and Computing, 53\u201367 (Springer, 2024).",
+            "DOI": "10.1007/978-3-031-79059-1_4"
+          },
+          {
+            "key": "4566_CR73",
+            "unstructured": "Boneh, D., Partap, A. & Waters, B. Accountable multi-signatures with constant size public keys. Cryptology ePrint Archive (2023)."
+          },
+          {
+            "key": "4566_CR74",
+            "doi-asserted-by": "crossref",
+            "unstructured": "Baum, C. et al. Efficient maliciously secure oblivious exponentiations. Cryptology ePrint Archive (2024).",
+            "DOI": "10.62056/a66cy7qiu"
+          },
+          {
+            "key": "4566_CR75",
+            "first-page": "1",
+            "volume": "62",
+            "author": "J Zhang",
+            "year": "2019",
+            "unstructured": "Zhang, J., Lu, N., Ma, J. & Yang, C. Universally composable secure geographic area verification without pre-shared secret. Sci. China Life. Sci. 62, 1\u201315 (2019).",
+            "journal-title": "Sci. China Life. Sci."
+          },
+          {
+            "key": "4566_CR76",
+            "volume-title": "Computer networks: a systems approach",
+            "author": "LL Peterson",
+            "year": "2007",
+            "unstructured": "Peterson, L. L. & Davie, B. S. Computer networks: a systems approach (Morgan Kaufmann, San Francisco, USA, 2007)."
+          },
+          {
+            "key": "4566_CR77",
+            "unstructured": "Proposals, E.\u00a0I. Eip-225: Clique proof-of-authority consensus protocol. https://eips.ethereum.org/EIPS/eip-225 (2017). Accessed: 2024-12-17."
+          }
+        ],
+        "container-title": [
+          "Scientific Reports"
+        ],
+        "original-title": [],
+        "language": "en",
+        "link": [
+          {
+            "URL": "https://www.nature.com/articles/s41598-025-04566-4.pdf",
+            "content-type": "application/pdf",
+            "content-version": "vor",
+            "intended-application": "text-mining"
+          },
+          {
+            "URL": "https://www.nature.com/articles/s41598-025-04566-4",
+            "content-type": "text/html",
+            "content-version": "vor",
+            "intended-application": "text-mining"
+          },
+          {
+            "URL": "https://www.nature.com/articles/s41598-025-04566-4.pdf",
+            "content-type": "application/pdf",
+            "content-version": "vor",
+            "intended-application": "similarity-checking"
+          }
+        ],
+        "deposited": {
+          "date-parts": [
+            [
+              2025,
+              6,
+              5
+            ]
+          ],
+          "date-time": "2025-06-05T12:48:20Z",
+          "timestamp": 1749127700000
+        },
+        "score": 1,
+        "resource": {
+          "primary": {
+            "URL": "https://www.nature.com/articles/s41598-025-04566-4"
+          }
+        },
+        "subtitle": [],
+        "short-title": [],
+        "issued": {
+          "date-parts": [
+            [
+              2025,
+              6,
+              5
+            ]
+          ]
+        },
+        "references-count": 77,
+        "journal-issue": {
+          "issue": "1",
+          "published-online": {
+            "date-parts": [
+              [
+                2025,
+                12
+              ]
+            ]
+          }
+        },
+        "alternative-id": [
+          "4566"
+        ],
+        "URL": "https://doi.org/10.1038/s41598-025-04566-4",
+        "relation": {},
+        "ISSN": [
+          "2045-2322"
+        ],
+        "issn-type": [
+          {
+            "value": "2045-2322",
+            "type": "electronic"
+          }
+        ],
+        "subject": [],
+        "published": {
+          "date-parts": [
+            [
+              2025,
+              6,
+              5
+            ]
+          ]
+        },
+        "assertion": [
+          {
+            "value": "25 March 2025",
+            "order": 1,
+            "name": "received",
+            "label": "Received",
+            "group": {
+              "name": "ArticleHistory",
+              "label": "Article History"
+            }
+          },
+          {
+            "value": "27 May 2025",
+            "order": 2,
+            "name": "accepted",
+            "label": "Accepted",
+            "group": {
+              "name": "ArticleHistory",
+              "label": "Article History"
+            }
+          },
+          {
+            "value": "5 June 2025",
+            "order": 3,
+            "name": "first_online",
+            "label": "First Online",
+            "group": {
+              "name": "ArticleHistory",
+              "label": "Article History"
+            }
+          },
+          {
+            "order": 1,
+            "name": "Ethics",
+            "group": {
+              "name": "EthicsHeading",
+              "label": "Declarations"
+            }
+          },
+          {
+            "value": "The authors declare no competing interests",
+            "order": 2,
+            "name": "Ethics",
+            "group": {
+              "name": "EthicsHeading",
+              "label": "Competing Interests"
+            }
+          }
+        ],
+        "article-number": "19808"
+      },
+      "status": "registered"
+    },
+    "10.3389/fbloc.2025.1644115": {
+      "metadata_status": "retrieved",
+      "title": "Decentralized physical infrastructure networks (DePIN) tokenomics",
+      "authors": "Alshater, Muneer Maher",
+      "author": [
+        {
+          "given": "Muneer Maher",
+          "family": "Alshater",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "Department of Islamic Banking, The University of Jordan",
+              "place": [
+                "Amman, Jordan"
+              ]
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "year": "2026",
+      "journal": "Frontiers in Blockchain",
+      "volume": "8",
+      "issue": "",
+      "pages": "",
+      "doi": "10.3389/fbloc.2025.1644115",
+      "crossref_message": {
+        "indexed": {
+          "date-parts": [
+            [
+              2026,
+              11,
+              15
+            ]
+          ],
+          "date-time": "2026-11-15T01:54:42Z",
+          "timestamp": 1794707682609,
+          "version": "4.9.1"
+        },
+        "reference-count": 45,
+        "publisher": "Frontiers Media SA",
+        "license": [
+          {
+            "start": {
+              "date-parts": [
+                [
+                  2026,
+                  3,
+                  9
+                ]
+              ],
+              "date-time": "2026-03-09T00:00:00Z",
+              "timestamp": 1773014400000
+            },
+            "content-version": "vor",
+            "delay-in-days": 0,
+            "URL": "https://creativecommons.org/licenses/by/4.0/"
+          }
+        ],
+        "content-domain": {
+          "domain": [
+            "frontiersin.org"
+          ],
+          "crossmark-restriction": true
+        },
+        "short-container-title": [
+          "Front. Blockchain"
+        ],
+        "abstract": "<jats:p>Decentralized Physical Infrastructure Networks (DePIN) utilize crypto-economic incentives to orchestrate the crowdsourced deployment and operation of real-world infrastructure. The design and long-term viability of their tokenomic systems are central to their potential but represent a complex and rapidly evolving field. This scoping review provides a structured synthesis of DePIN tokenomics, moving beyond descriptive mapping to organize its core design primitives into a coherent analytical model. Following the Arksey and O'Malley framework and PRISMA-ScR guidelines, this review charts and synthesizes data thematically. Key findings reveal a prevailing \u201cDePIN Flywheel\u201d pattern grounded in a Burn-and-Mint Equilibrium, where demand is monetized through fiat-denominated usage credits created by burning the network\u2019s native token. This mechanism, alongside governance-calibrated issuance and collateral requirements, forms the core of DePIN\u2019s economic architecture. However, the literature consistently highlights significant challenges: the impact of token price volatility on provider economics, ensuring robust incentive alignment, generating sufficient non-speculative demand, and navigating regulatory uncertainty. We conclude with a research agenda prioritizing empirical event studies of governance changes, quality-adjusted reward measurement, and the development of valuation frameworks appropriate for these hybrid utility-governance assets.</jats:p>",
+        "DOI": "10.3389/fbloc.2025.1644115",
+        "type": "journal-article",
+        "created": {
+          "date-parts": [
+            [
+              2026,
+              3,
+              9
+            ]
+          ],
+          "date-time": "2026-03-09T05:23:04Z",
+          "timestamp": 1773033784000
+        },
+        "update-policy": "https://doi.org/10.3389/crossmark-policy",
+        "source": "Crossref",
+        "is-referenced-by-count": 3,
+        "title": [
+          "Decentralized physical infrastructure networks (DePIN) tokenomics"
+        ],
+        "prefix": "10.3389",
+        "volume": "8",
+        "author": [
+          {
+            "given": "Muneer Maher",
+            "family": "Alshater",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Department of Islamic Banking, The University of Jordan",
+                "place": [
+                  "Amman, Jordan"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "member": "1965",
+        "published-online": {
+          "date-parts": [
+            [
+              2026,
+              3,
+              9
+            ]
+          ]
+        },
+        "reference": [
+          {
+            "key": "B2",
+            "unstructured": "Payments. Akash docs\n          \n          \n          2025"
+          },
+          {
+            "key": "B4",
+            "volume-title": "Are you a DePIN? A decision tree to classify decentralized physical infrastructure networks",
+            "author": "Andrew",
+            "year": "2024"
+          },
+          {
+            "key": "B6",
+            "doi-asserted-by": "publisher",
+            "first-page": "19",
+            "DOI": "10.1080/1364557032000119616",
+            "article-title": "Scoping studies: towards a methodological framework",
+            "volume": "8",
+            "author": "Arksey",
+            "year": "2005",
+            "journal-title": "Int. J. Soc. Res. Methodol."
+          },
+          {
+            "key": "B7",
+            "unstructured": "State of US DePIN regulation: where things stand in 2025. IoTeX blog\n          \n          \n            \n              Aslam\n              K.\n            \n          \n          \n          2025"
+          },
+          {
+            "key": "B8",
+            "doi-asserted-by": "crossref",
+            "DOI": "10.1109/ICBC59979.2024.10634394",
+            "article-title": "Performance analysis of decentralized physical infrastructure networks and centralized clouds",
+            "volume-title": "2024 IEEE International Conference on Blockchain and Cryptocurrency (ICBC)",
+            "author": "Assen",
+            "year": "2024"
+          },
+          {
+            "key": "B9",
+            "doi-asserted-by": "crossref",
+            "first-page": "1",
+            "DOI": "10.1109/WF-IoT58464.2023.10539514",
+            "article-title": "A taxonomy for blockchain-based decentralized physical infrastructure networks (DePIN)",
+            "volume-title": "2023 IEEE World Forum on Internet of Things (WF-IoT)",
+            "author": "Ballandies",
+            "year": "2023"
+          },
+          {
+            "key": "B10",
+            "unstructured": "State of DePIN 2024. Messari\n          \n          \n            \n              Bane\n              D.\n            \n            \n              Gala\n              S.\n            \n          \n          \n          2025"
+          },
+          {
+            "key": "B11",
+            "article-title": "Security and privacy issues in decentralized physical infrastructure networks (DePIN)",
+            "author": "Caprolu",
+            "year": "2024",
+            "journal-title": "Aut. Comput. Patterns"
+          },
+          {
+            "key": "B12",
+            "first-page": "301",
+            "article-title": "Sharing is (S)caring: security and privacy issues in decentralized physical infrastructure networks (DePIN)",
+            "volume-title": "Lecture notes in computer science",
+            "author": "Caprolu",
+            "year": "2025"
+          },
+          {
+            "key": "B13",
+            "doi-asserted-by": "crossref",
+            "DOI": "10.1109/ISNCC62547.2024.10759033",
+            "article-title": "CircularX regenerative resources DePIN",
+            "volume-title": "2024 International Symposium on Networks, Computers and Communications (ISNCC)",
+            "author": "Chiu",
+            "year": "2024"
+          },
+          {
+            "key": "B14",
+            "article-title": "DePIN: a framework for token-incentivized participatory sensing",
+            "author": "Chiu",
+            "year": "2024",
+            "journal-title": "arXiv"
+          },
+          {
+            "key": "B15",
+            "doi-asserted-by": "crossref",
+            "DOI": "10.1109/ICBC59979.2024.10634396",
+            "article-title": "Towards a trusted and cryptocurrency-enabled decentralized wireless community network",
+            "volume-title": "2024 IEEE International Conference on Blockchain and Cryptocurrency (ICBC)",
+            "author": "Choi",
+            "year": "2024"
+          },
+          {
+            "key": "B16",
+            "doi-asserted-by": "publisher",
+            "first-page": "1105",
+            "DOI": "10.1093/rfs/hhaa089",
+            "article-title": "Tokenomics: dynamic adoption and valuation",
+            "volume": "34",
+            "author": "Cong",
+            "year": "2021",
+            "journal-title": "Rev. Financial Stud."
+          },
+          {
+            "key": "B17",
+            "first-page": "9",
+            "article-title": "Towards a Rollup-Centric scalable architecture for decentralized physical infrastructure networks",
+            "volume-title": "Proceedings of the 5th ACM International Workshop on Blockchain-Enabled Networked Sensor Systems",
+            "author": "Fan",
+            "year": "2023"
+          },
+          {
+            "key": "B18",
+            "doi-asserted-by": "crossref",
+            "first-page": "727",
+            "DOI": "10.1109/BCCA62388.2024.10844432",
+            "article-title": "New directions in decentralized physical infrastructure networks",
+            "volume-title": "2024 6th International Conference on Blockchain Computing and Applications (BCCA)",
+            "author": "Fan",
+            "year": "2024"
+          },
+          {
+            "key": "B19",
+            "volume-title": "Scaling proof-of-replication for filecoin mining",
+            "author": "Fisch",
+            "year": "2018"
+          },
+          {
+            "key": "B20",
+            "article-title": "The quiet rise of DePIN: why you should pay attention to decentralized physical infrastructures networks",
+            "year": "2024",
+            "journal-title": "Forbes"
+          },
+          {
+            "key": "B21",
+            "doi-asserted-by": "publisher",
+            "first-page": "99",
+            "DOI": "10.1007/BF00196791",
+            "article-title": "How to time-stamp a digital document",
+            "volume": "3",
+            "author": "Haber",
+            "year": "1991",
+            "journal-title": "J. Cryptol."
+          },
+          {
+            "key": "B22",
+            "doi-asserted-by": "crossref",
+            "first-page": "583",
+            "DOI": "10.1109/Blockchain62396.2024.00086",
+            "article-title": "Towards credential-based device registration in DApps for DePINs with ZKPs",
+            "volume-title": "Proceedings - 2024 IEEE International Conference on Blockchain (Blockchain)",
+            "author": "Heiss",
+            "year": "2024"
+          },
+          {
+            "key": "B23",
+            "article-title": "HIP-138: return to HNT",
+            "year": "2024",
+            "journal-title": "GitHub"
+          },
+          {
+            "key": "B26",
+            "volume-title": "Data credit (DC) fundamentals",
+            "year": ""
+          },
+          {
+            "key": "B28",
+            "unstructured": "Proof-of-coverage (PoC). Helium docs"
+          },
+          {
+            "key": "B29",
+            "article-title": "Map improvement proposal 19 (MIP-19): map credit pricing",
+            "year": "2024",
+            "journal-title": "Medium"
+          },
+          {
+            "key": "B30",
+            "article-title": "HONEY burn-and-mint (map credits)",
+            "year": "2025",
+            "journal-title": "Hivemapper Docs"
+          },
+          {
+            "key": "B32",
+            "doi-asserted-by": "crossref",
+            "first-page": "91",
+            "DOI": "10.1007/978-3-030-93975-5_6",
+            "article-title": "Tokenomics: decentralized incentivization in the context of data spaces",
+            "volume-title": "Designing Data Spaces: The Ecosystem Approach to Competitive Advantage",
+            "author": "J\u00fcrjens",
+            "year": "2022"
+          },
+          {
+            "key": "B33",
+            "doi-asserted-by": "publisher",
+            "first-page": "69",
+            "DOI": "10.1186/1748-5908-5-69",
+            "article-title": "Scoping studies: advancing the methodology",
+            "volume": "5",
+            "author": "Levac",
+            "year": "2010",
+            "journal-title": "Implement. Sci."
+          },
+          {
+            "key": "B34",
+            "doi-asserted-by": "crossref",
+            "first-page": "1",
+            "DOI": "10.1109/WF-IoT58464.2023.10539386",
+            "article-title": "Burn-and-Mint: a tokenomics mechanism for DePIN",
+            "volume-title": "2023 IEEE World Forum on Internet of Things (WF-IoT)",
+            "author": "Lin",
+            "year": "2023"
+          },
+          {
+            "key": "B35",
+            "doi-asserted-by": "publisher",
+            "first-page": "91",
+            "DOI": "10.1109/MNET.2024.3487924",
+            "article-title": "Decentralized physical infrastructure networks (DePIN): challenges and opportunities",
+            "volume": "39",
+            "author": "Lin",
+            "year": "2025",
+            "journal-title": "IEEE Netw."
+          },
+          {
+            "key": "B36",
+            "doi-asserted-by": "publisher",
+            "first-page": "6568",
+            "DOI": "10.1287/mnsc.2023.4882",
+            "article-title": "Tokenomics: when tokens beat equity",
+            "volume": "69",
+            "author": "Malinova",
+            "year": "2023",
+            "journal-title": "Manag. Sci."
+          },
+          {
+            "key": "B37",
+            "article-title": "LooPIN: a PinFi protocol for decentralized computing",
+            "author": "Mao",
+            "year": "2024",
+            "journal-title": "arXiv"
+          },
+          {
+            "key": "B38",
+            "article-title": "DePIN tokenomics part 1: token distribution models, incentive mechanisms, token trends, and more",
+            "year": "2025",
+            "journal-title": "Messari"
+          },
+          {
+            "key": "B39",
+            "article-title": "Decentralised governance for autonomous cyber-physical systems",
+            "author": "Nabben",
+            "year": "2024",
+            "journal-title": "arXiv"
+          },
+          {
+            "key": "B40",
+            "unstructured": "Bitcoin: a peer-to-peer electronic cash system\n          \n          \n            \n              Nakamoto\n              S.\n            \n          \n          \n          2008"
+          },
+          {
+            "key": "B41",
+            "doi-asserted-by": "publisher",
+            "first-page": "2119",
+            "DOI": "10.11124/JBIES-20-00167",
+            "article-title": "Updated methodological guidance for the conduct of scoping reviews",
+            "volume": "18",
+            "author": "Peters",
+            "year": "2020",
+            "journal-title": "JBI Evid. Synth."
+          },
+          {
+            "key": "B42",
+            "doi-asserted-by": "crossref",
+            "DOI": "10.1002/9780470754887",
+            "volume-title": "Systematic reviews in the social sciences: a practical guide",
+            "author": "Petticrew",
+            "year": "2006"
+          },
+          {
+            "key": "B43",
+            "first-page": "234",
+            "article-title": "DePIN: reimagining physical infrastructure with decentralised model",
+            "volume": "11",
+            "author": "Pithadia",
+            "year": "2024",
+            "journal-title": "J. Emerg. Technol. Innovative Res."
+          },
+          {
+            "key": "B44",
+            "volume-title": "From digital collectibles to global infrastructure: how RWA, DePIN, and tokenization unlock real-world value",
+            "year": "2025"
+          },
+          {
+            "key": "B45",
+            "volume-title": "Guidance on the conduct of narrative synthesis in systematic reviews",
+            "author": "Popay",
+            "year": "2006"
+          },
+          {
+            "key": "B46",
+            "article-title": "Storage proving (proof-of-spacetime)",
+            "year": "2024",
+            "journal-title": "Filecoin Docs"
+          },
+          {
+            "key": "B47",
+            "unstructured": "Proofs. Filecoin spec\n          \n          \n          2025"
+          },
+          {
+            "key": "B48",
+            "volume-title": "DePin: why this will be big in 2025",
+            "author": "Puckrin",
+            "year": "2024"
+          },
+          {
+            "key": "B49",
+            "article-title": "Burn-mint equilibrium (BME)",
+            "volume-title": "Render network knowledge base",
+            "year": "2024"
+          },
+          {
+            "key": "B51",
+            "doi-asserted-by": "publisher",
+            "first-page": "990",
+            "DOI": "10.1162/154247603322493212",
+            "article-title": "Platform competition in two-sided markets",
+            "volume": "1",
+            "author": "Rochet",
+            "year": "2003",
+            "journal-title": "J. Eur. Econ. Assoc."
+          },
+          {
+            "key": "B52",
+            "doi-asserted-by": "publisher",
+            "first-page": "45",
+            "DOI": "10.1186/1471-2288-8-45",
+            "article-title": "Methods for the thematic synthesis of qualitative research in systematic reviews",
+            "volume": "8",
+            "author": "Thomas",
+            "year": "2008",
+            "journal-title": "BMC Med. Res. Methodol."
+          },
+          {
+            "key": "B53",
+            "doi-asserted-by": "publisher",
+            "first-page": "467",
+            "DOI": "10.7326/M18-0850",
+            "article-title": "PRISMA extension for scoping reviews (PRISMA-ScR): checklist and explanation",
+            "volume": "169",
+            "author": "Tricco",
+            "year": "2018",
+            "journal-title": "Ann. Intern. Med."
+          }
+        ],
+        "container-title": [
+          "Frontiers in Blockchain"
+        ],
+        "original-title": [],
+        "link": [
+          {
+            "URL": "https://www.frontiersin.org/articles/10.3389/fbloc.2025.1644115/full",
+            "content-type": "unspecified",
+            "content-version": "vor",
+            "intended-application": "similarity-checking"
+          }
+        ],
+        "deposited": {
+          "date-parts": [
+            [
+              2026,
+              3,
+              9
+            ]
+          ],
+          "date-time": "2026-03-09T05:23:09Z",
+          "timestamp": 1773033789000
+        },
+        "score": 1,
+        "resource": {
+          "primary": {
+            "URL": "https://www.frontiersin.org/articles/10.3389/fbloc.2025.1644115/full"
+          }
+        },
+        "subtitle": [],
+        "short-title": [],
+        "issued": {
+          "date-parts": [
+            [
+              2026,
+              3,
+              9
+            ]
+          ]
+        },
+        "references-count": 45,
+        "alternative-id": [
+          "10.3389/fbloc.2025.1644115"
+        ],
+        "URL": "https://doi.org/10.3389/fbloc.2025.1644115",
+        "relation": {
+          "has-part": [
+            {
+              "id-type": "doi",
+              "id": "https://doi.org/10.3389/fbloc.2025.1644115.s001",
+              "asserted-by": "subject"
+            }
+          ]
+        },
+        "ISSN": [
+          "2624-7852"
+        ],
+        "issn-type": [
+          {
+            "value": "2624-7852",
+            "type": "electronic"
+          }
+        ],
+        "subject": [],
+        "published": {
+          "date-parts": [
+            [
+              2026,
+              3,
+              9
+            ]
+          ]
+        },
+        "article-number": "1644115"
+      },
+      "status": "registered"
+    }
+  },
+  "errors": {},
+  "missing": [],
+  "inconclusive": [],
+  "verification_scope": "DOI registration and Crossref metadata, not claim support or retraction screening"
+}
