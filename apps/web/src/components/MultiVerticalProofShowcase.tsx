@@ -15,9 +15,9 @@ export interface ShowcaseProofCard {
 export const SHOWCASE_PROOF_CARDS: ShowcaseProofCard[] = [
   {
     id: 'CACAO-CI-2026-001',
-    vertical: 'auctum.cacao_ag',
+    vertical: 'eudr.cacao_ag',
     bucket: 'Bucket 5 · EUDR Commodities',
-    title: 'AUCTUM.cacao/ag — Côte d’Ivoire Estate Lot',
+    title: 'EUDR Cacao/Ag — Côte d’Ivoire Estate Lot',
     status: 'EUDR_COMPLIANT',
     regulation: 'EU-2023-1115 / TRACES-NT',
     metrics: { hs_code: '1801', area_ha: 6.5, deforestation_free: true, income_floor_met: true },
@@ -25,9 +25,9 @@ export const SHOWCASE_PROOF_CARDS: ShowcaseProofCard[] = [
   },
   {
     id: 'COFFEE-CO-2026-884',
-    vertical: 'auctum.coffee',
+    vertical: 'eudr.coffee',
     bucket: 'Bucket 5 · Specialty Coffee',
-    title: 'AUCTUM.coffee — Huila Washed Micro-Lot',
+    title: 'Origin Coffee Ledger — Huila Washed Micro-Lot',
     status: 'EUDR_COMPLIANT',
     regulation: 'EU-2023-1115 / Farmgate Guarantee',
     metrics: { hs_code: '0901', cupping_score: 88.25, farmgate_usd_kg: 5.1, moisture_pct: 10.8 },
@@ -35,9 +35,9 @@ export const SHOWCASE_PROOF_CARDS: ShowcaseProofCard[] = [
   },
   {
     id: 'CLM-TX-9001',
-    vertical: 'auctum.claims',
+    vertical: 'atlas.claims',
     bucket: 'Bucket 3 · Built-World & Storm',
-    title: 'AUCTUM.atlas / Claims — Hail C2SP Packet',
+    title: 'Atlas Storm & Claims — Hail C2SP Packet',
     status: 'C2SP_VERIFIED',
     regulation: 'C2SP Merkle / GIE Hex-Grid',
     metrics: { hail_mm: 54, peak_wind_kt: 58, sensor_streams: 3, tamper_score: 0.02 },
@@ -67,7 +67,7 @@ export const SHOWCASE_PROOF_CARDS: ShowcaseProofCard[] = [
     id: 'WS-FID-3019',
     vertical: 'wealth.fiduciary_os',
     bucket: 'Bucket 4 · Fiduciary & Care',
-    title: 'Wealth Symphony × AUCTUM.Insights Audit',
+    title: 'Wealth Symphony × Property Insights Audit',
     status: 'SR_11_7_VERIFIED',
     regulation: 'SR 11-7 / EU AI Act Art. 14',
     metrics: { human_oversight_gate: true, provenance_sources: 4, deterministic_replay: true },
@@ -117,7 +117,7 @@ export function MultiVerticalProofShowcase() {
             Multi-Vertical Spaces Proof Showcase
           </div>
           <h2 className="mt-1 font-display text-lg font-bold text-obsidian-ink">
-            Zero-PII &lt;5 KB Cryptographic Proof Cards Across Every AUCTUM &amp; Vanguard Bucket
+            Zero-PII &lt;5 KB Cryptographic Proof Cards Across Every Sovereign Ecosystem Bucket
           </h2>
           <p className="mt-1 text-xs text-obsidian-muted">
             Select any vertical below to inspect its live Spaces card payload and verify its SHA-256 digest directly in your browser.

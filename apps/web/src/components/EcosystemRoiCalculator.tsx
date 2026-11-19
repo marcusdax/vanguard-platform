@@ -34,7 +34,7 @@ export const SOVEREIGN_CAREER_TRACKS: CareerTrack[] = [
   {
     id: 'field_evidence_auditor',
     title: 'Verified Field Evidence Auditor',
-    tierLabel: 'Fieldwright · AUCTUM.atlas / Claims / EUDR',
+    tierLabel: 'Fieldwright · Atlas / Claims / EUDR',
     hourlyBenchmarkUsd: 54.97,
     description: 'Captures storm C2SP roof/property packets, EUDR farm polygons, or municipal inspections with $0 worker floor fees.',
   },
