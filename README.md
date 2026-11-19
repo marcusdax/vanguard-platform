@@ -15,6 +15,8 @@ Standalone, token-branded monorepo for the **Vanguard** dispatch, verification, 
 
 ## Quick Start (Docker Compose)
 
+Make sure Docker Desktop is running first, then launch the isolated standalone stack:
+
 ```bash
 docker compose -p vanguard-platform up -d --build --wait
 ```
@@ -24,6 +26,10 @@ Once healthy:
 - **Neighborhood Mode Portal (Mode A 64px accessible UI):** <http://localhost:3200/community>
 - **Client-Side Evidence Verifier (< 5 KB):** <http://localhost:3200/verify>
 - **API Health:** <http://localhost:5200/api/v1/health>
+
+## CI Workflow Template
+
+A full multi-job GitHub Actions template (Trust Engine, Web, API, Vision, and Android Gradle unit suites) is included at [`docs/workflows/ci.yml`](docs/workflows/ci.yml). Copy it into `.github/workflows/ci.yml` using a GitHub token that carries the `workflow` scope to activate CI on push.
 
 ## Token-Driven Rebranding
 
