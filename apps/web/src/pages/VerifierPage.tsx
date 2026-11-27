@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, CheckCircle2, FileCheck2, Search, ShieldAlert, ShieldCheck } from 'lucide-react';
 import { api } from '@/lib/api';
+import { MultiVerticalProofShowcase } from '@/components/MultiVerticalProofShowcase';
+import { EcosystemRoiCalculator } from '@/components/EcosystemRoiCalculator';
 
 declare global {
   interface Window {
@@ -215,6 +217,9 @@ export function VerifierPage() {
             </section>
           </div>
         )}
+
+        <MultiVerticalProofShowcase />
+        <EcosystemRoiCalculator />
       </main>
     </div>
   );
