@@ -455,7 +455,28 @@ export async function dispatchBountiesFromStormEvent(params: {
   });
   if (!event) return { ok: false as const, error: 'StormEvent not found' };
 
-  const coords = (event.affectedArea as any)?.center || { lat: 32.5441, lng: -97.3201 };
+  const geom = event.geometry as { type?: string; coordinates?: any } | null;
+  let polyCenter: { lat: number; lng: number } | null = null;
+  if (geom?.type === 'Point' && Array.isArray(geom.coordinates)) {
+    polyCenter = { lat: Number(geom.coordinates[1]), lng: Number(geom.coordinates[0]) };
+  } else if (geom?.type === 'Polygon' && Array.isArray(geom.coordinates?.[0])) {
+    const ring = geom.coordinates[0] as number[][];
+    if (ring.length > 0) {
+      polyCenter = {
+        lat: ring.reduce((s, p) => s + Number(p[1] || 0), 0) / ring.length,
+        lng: ring.reduce((s, p) => s + Number(p[0] || 0), 0) / ring.length,
+      };
+    }
+  } else if (geom?.type === 'MultiPolygon' && Array.isArray(geom.coordinates?.[0]?.[0])) {
+    const ring = geom.coordinates[0][0] as number[][];
+    if (ring.length > 0) {
+      polyCenter = {
+        lat: ring.reduce((s, p) => s + Number(p[1] || 0), 0) / ring.length,
+        lng: ring.reduce((s, p) => s + Number(p[0] || 0), 0) / ring.length,
+      };
+    }
+  }
+  const coords = polyCenter || (event.affectedArea as any)?.center || { lat: 32.5441, lng: -97.3201 };
   const baseLat = Number(coords.lat) || 32.5441;
   const baseLng = Number(coords.lng) || -97.3201;
 

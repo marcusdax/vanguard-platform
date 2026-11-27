@@ -33,18 +33,31 @@ export function EconomicLab() {
 
   const halfLife = useMemo(() => {
     const decayFactor = Math.pow(0.5, ageDays / 120);
-    const queryPriceCents = Math.max(100, Math.round(1600 * decayFactor));
-    const workerRoyaltyCents = Math.round(queryPriceCents * 0.5);
-    const homeownerRoyaltyCents = Math.round(queryPriceCents * 0.25);
+    const queryPriceCents = Math.max(250, Math.round(1600 * decayFactor));
+    const workerRoyaltyCents = Math.round(queryPriceCents * 0.25);
+    const homeownerRoyaltyCents = Math.round(queryPriceCents * 0.1);
     const treasuryBurnCents = queryPriceCents - workerRoyaltyCents - homeownerRoyaltyCents;
     const stale = ageDays >= 90;
-    return { queryPriceCents, workerRoyaltyCents, homeownerRoyaltyCents, treasuryBurnCents, stale };
+    const refreshMultiplier =
+      ageDays < 90
+        ? 1.0
+        : Number((1.0 + ((Math.min(ageDays, 365) - 90) / 275) * 0.85).toFixed(2));
+    return {
+      queryPriceCents,
+      workerRoyaltyCents,
+      homeownerRoyaltyCents,
+      treasuryBurnCents,
+      stale,
+      refreshMultiplier,
+    };
   }, [ageDays]);
 
   async function computeLiveHash() {
     const canonical = JSON.stringify({
-      actorId: 'operator-demo',
+      actorId: 'op-1',
+      at: '2026-01-15T12:00:00.000Z',
       kind: 'CAPTURE',
+      payload: { captureStandardMet: 'true', mediaCount: '4' },
       prevHash: '0'.repeat(64),
       seq: 1,
       summary: sandboxSummary.normalize('NFC'),
@@ -216,19 +229,21 @@ export function EconomicLab() {
               </span>
             </div>
             <div className="flex items-center justify-between rounded-lg bg-obsidian-ground px-3.5 py-2.5">
-              <span className="text-obsidian-muted">Capturer Royalty (50%)</span>
+              <span className="text-obsidian-muted">Capturer Royalty (25%)</span>
               <span className="font-mono font-semibold text-obsidian-proof tnum">
                 {formatUsd(halfLife.workerRoyaltyCents)}
               </span>
             </div>
             <div className="flex items-center justify-between rounded-lg bg-obsidian-ground px-3.5 py-2.5">
-              <span className="text-obsidian-muted">Opt-In Parcel Owner Share (25%)</span>
+              <span className="text-obsidian-muted">Opt-In Parcel Owner Share (10%)</span>
               <span className="font-mono font-semibold text-obsidian-amber tnum">
                 {formatUsd(halfLife.homeownerRoyaltyCents)}
               </span>
             </div>
             <div className="flex items-center justify-between rounded-lg bg-obsidian-ground px-3.5 py-2.5">
-              <span className="text-obsidian-muted">Protocol Treasury / Burn (25%)</span>
+              <span className="text-obsidian-muted">
+                Protocol Treasury / Burn (65% · Refresh {halfLife.refreshMultiplier.toFixed(2)}x)
+              </span>
               <span className="font-mono text-obsidian-muted tnum">
                 {formatUsd(halfLife.treasuryBurnCents)}
               </span>

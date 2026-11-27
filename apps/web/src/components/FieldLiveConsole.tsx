@@ -107,14 +107,19 @@ export function FieldLiveConsole() {
   async function runVisionInspection(fileUrl?: string) {
     setBusy(true);
     try {
-      const { data } = await api.post('/field/social/ai/analyze-photo', {
+      const { data } = await api.post('/field/social/analyze-photo', {
         fileUrl,
         fileName: 'slope-inspection.jpg',
         notes: 'Check shingle hail strikes and ridge cap condition',
       });
-      const damage = data?.analysis?.damageClass ?? data?.damageClass ?? 'ASSESSED';
-      const strikes = data?.analysis?.hailStrikeCount ?? data?.hailStrikeCount ?? 0;
-      setVisionSummary(`Vanguard Vision Sidecar: ${damage} · ${strikes} strikes flagged`);
+      const analysis = data?.data ?? data?.analysis ?? data;
+      const damage = analysis?.damageClass ?? 'ASSESSED';
+      const strikes = analysis?.hailStrikeCount ?? 0;
+      const conf =
+        typeof analysis?.confidence === 'number'
+          ? ` (${Math.round(analysis.confidence * 100)}% conf)`
+          : '';
+      setVisionSummary(`Vanguard Vision Sidecar: ${damage} · ${strikes} strikes flagged${conf}`);
     } catch (err: any) {
       setVisionSummary(err?.response?.data?.error || 'Vision inspection request queued.');
     } finally {

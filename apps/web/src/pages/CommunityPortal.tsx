@@ -12,10 +12,11 @@ interface CreatedBooking {
     id: string;
     title: string;
     address: string;
-    pin: string;
     grossBountyCents: number;
+    completionPinPreview?: string;
   };
-  quote: {
+  verbalPin: string;
+  feeQuote: {
     workerReceivesCents: number;
     feeCents: number;
     totalBuyerChargeCents: number;
@@ -243,7 +244,7 @@ export function CommunityPortal() {
                 className="mt-1 h-6 w-6 accent-linen-emerald"
               />
               <span className="text-base text-linen-ink">
-                <strong>Share exterior yard condition photos for 25% Homeowner Data Royalty.</strong>{' '}
+                <strong>Share exterior yard condition photos for 10% Homeowner Data Royalty.</strong>{' '}
                 <span className="text-linen-muted">
                   Optional — never medical information, and faces or license plates stay blurred on-device.
                 </span>
@@ -295,14 +296,14 @@ export function CommunityPortal() {
                       Your 4-Digit Verbal Arrival PIN
                     </div>
                     <div className="mt-2 font-mono text-5xl font-bold tracking-[0.25em] text-linen-ink tnum">
-                      {confirmed.task.pin}
+                      {confirmed.verbalPin || confirmed.task.completionPinPreview}
                     </div>
                     <p className="mt-2 text-base text-linen-muted">
                       {confirmed.pinHint || 'Read this PIN aloud when your helper arrives so payment escrow unlocks safely.'}
                     </p>
                   </div>
 
-                  <p className="mt-4 text-sm text-linen-muted">{confirmed.quote.disclosureCopy}</p>
+                  <p className="mt-4 text-sm text-linen-muted">{confirmed.feeQuote?.disclosureCopy}</p>
                 </div>
               </div>
             </section>

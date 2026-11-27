@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import vm from 'node:vm';
 import { BRAND_CONFIG } from './brand/brandConfig';
+import { extractGeoCenter } from './lib/geo';
 
 const RECORD_A_HASH = '20f78a5f916dca1c5297e9eb4788a3ea7d170760f122270d0abf141a20c9b65e';
 const RECORD_B_HASH = '7c4a8fbf2912553421dff3c9ea492da8b7908e29c3ebb57b6206fb6c1d98c78e';
@@ -57,5 +58,25 @@ describe('@vanguard/web Standalone Verifier & Brand Config', () => {
     const chainRes = await verifier.verifyChain(records);
     expect(chainRes.valid).toBe(true);
     expect(chainRes.headHash).toBe(RECORD_B_HASH);
+  });
+
+  it('computes accurate centroids for NOAA Point, Polygon, and MultiPolygon storm alerts', () => {
+    expect(extractGeoCenter({ type: 'Point', coordinates: [-97.32, 32.54] })).toEqual({
+      lat: 32.54,
+      lng: -97.32,
+    });
+    const poly = extractGeoCenter({
+      type: 'Polygon',
+      coordinates: [[[-97.0, 32.0], [-97.0, 33.0], [-98.0, 33.0], [-98.0, 32.0]]],
+    });
+    expect(poly?.lat).toBeCloseTo(32.5, 4);
+    expect(poly?.lng).toBeCloseTo(-97.5, 4);
+
+    const multi = extractGeoCenter({
+      type: 'MultiPolygon',
+      coordinates: [[[[-96.0, 33.0], [-96.0, 33.2], [-96.2, 33.2], [-96.2, 33.0]]]],
+    });
+    expect(multi?.lat).toBeCloseTo(33.1, 4);
+    expect(multi?.lng).toBeCloseTo(-96.1, 4);
   });
 });

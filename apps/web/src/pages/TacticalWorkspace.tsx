@@ -4,6 +4,7 @@ import {
   Activity,
   Award,
   CheckCircle2,
+  CloudLightning,
   Compass,
   Cpu,
   ExternalLink,
@@ -27,6 +28,7 @@ import { useAuthStore } from '@/stores/authStore';
 import { ShortestFixModal } from '@/components/ShortestFixModal';
 import { EconomicLab } from '@/components/EconomicLab';
 import { FieldLiveConsole } from '@/components/FieldLiveConsole';
+import { StormMapConsole } from '@/components/StormMapConsole';
 import type {
   AcademyResponse,
   CatalogResponse,
@@ -36,11 +38,12 @@ import type {
   SpatialAssetItem,
 } from '@/types/vanguard';
 
-type NavTab = 'overview' | 'dispatch' | 'academy' | 'economics' | 'field' | 'attestor';
+type NavTab = 'overview' | 'dispatch' | 'storms' | 'academy' | 'economics' | 'field' | 'attestor';
 
 const NAV_ITEMS: Array<{ id: NavTab; label: string; icon: typeof Compass }> = [
   { id: 'overview', label: 'Network & Verticals', icon: Compass },
   { id: 'dispatch', label: 'H3 Batch Dispatch', icon: MapIcon },
+  { id: 'storms', label: 'Storms & Spatial Map', icon: CloudLightning },
   { id: 'academy', label: 'Open Academy', icon: GraduationCap },
   { id: 'economics', label: 'Economics & DePIN', icon: Vault },
   { id: 'field', label: 'Field Feed & Live', icon: Radio },
@@ -897,6 +900,17 @@ export function TacticalWorkspace() {
                 </div>
               )}
             </div>
+          )}
+
+          {/* STORMS & SPATIAL INTELLIGENCE MAP */}
+          {activeTab === 'storms' && (
+            <StormMapConsole
+              userAuthenticated={Boolean(user)}
+              onDispatchedBounties={() => {
+                void loadAuthenticatedData();
+                setActiveTab('dispatch');
+              }}
+            />
           )}
 
           {/* TAB 5: FIELD FEED & LIVE */}

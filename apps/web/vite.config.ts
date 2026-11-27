@@ -29,7 +29,17 @@ export default defineConfig({
     },
   },
   build: {
+    target: 'esnext',
     outDir: 'dist',
     sourcemap: false,
+    chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          maplibre: ['maplibre-gl'],
+          leaflet: ['leaflet'],
+        },
+      },
+    },
   },
 });

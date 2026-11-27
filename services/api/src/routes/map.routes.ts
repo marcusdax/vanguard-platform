@@ -79,11 +79,17 @@ router.get('/storm-markers', async (req: AuthRequest, res, next) => {
         if (alert.geometry.type === 'Point') {
           [lon, lat] = alert.geometry.coordinates;
         } else if (alert.geometry.type === 'Polygon') {
-          const coords = alert.geometry.coordinates[0];
-          const sumLat = coords.reduce((sum: number, c: number[]) => sum + c[1], 0);
-          const sumLon = coords.reduce((sum: number, c: number[]) => sum + c[0], 0);
-          lat = sumLat / coords.length;
-          lon = sumLon / coords.length;
+          const coords = alert.geometry.coordinates[0] || [];
+          if (coords.length > 0) {
+            lat = coords.reduce((sum: number, c: number[]) => sum + c[1], 0) / coords.length;
+            lon = coords.reduce((sum: number, c: number[]) => sum + c[0], 0) / coords.length;
+          }
+        } else if (alert.geometry.type === 'MultiPolygon') {
+          const coords = alert.geometry.coordinates[0]?.[0] || [];
+          if (coords.length > 0) {
+            lat = coords.reduce((sum: number, c: number[]) => sum + c[1], 0) / coords.length;
+            lon = coords.reduce((sum: number, c: number[]) => sum + c[0], 0) / coords.length;
+          }
         }
 
         return {

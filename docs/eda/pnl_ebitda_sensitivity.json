@@ -1,0 +1,73 @@
+{
+  "analysis": {
+    "audit_type": "distribution_and_outlier_sensitivity",
+    "columns": [
+      {
+        "bounded_numeric_sample_count": 432,
+        "column_id": "column_2a0d4d74771a0d64",
+        "location_and_scale": {
+          "interquartile_range": 18339.7875,
+          "mean": 18502.287800925926,
+          "median": -15931.125,
+          "median_absolute_deviation": 4792.860000000001,
+          "q1": -18275.4125,
+          "q3": 64.375,
+          "sample_standard_deviation": 106811.57648783755
+        },
+        "missing_count": 0,
+        "nonnumeric_count": 0,
+        "numeric_count": 432,
+        "outlier_sensitivity": {
+          "iqr_fence_high": 27574.056249999998,
+          "iqr_fence_low": -45785.09375,
+          "mean_without_iqr_fence_values": -15219.440617977529,
+          "outside_iqr_fence_count_in_sample": 76,
+          "raw_minus_trimmed_mean": 25264.857685318988,
+          "ten_percent_trimmed_mean": -6762.569884393064,
+          "ten_percent_winsorized_mean": -366.48912037037013,
+          "values_were_not_deleted_or_modified": true
+        },
+        "sample_is_bounded": false,
+        "transformation_sensitivity": {
+          "candidate": "signed_log1p",
+          "diagnostic_only": true,
+          "fit_on_training_data_only_if_later_adopted": true,
+          "raw_skewness_moment": 4.173436599298132,
+          "signed_log1p_skewness_moment": 1.1631435851332064
+        }
+      }
+    ],
+    "columns_skipped_by_default_limit": 0,
+    "interpretation": [
+      "IQR fences are descriptive flags, not deletion rules.",
+      "Transformation comparisons are exploratory diagnostics, not automatic recommendations.",
+      "No hypothesis tests, p-values, imputations, or causal claims are produced.",
+      "If later tests are run, define the hypothesis family and multiplicity procedure first."
+    ],
+    "numeric_columns_reported": 1,
+    "raw_values_emitted": false,
+    "row_limit_reached": false,
+    "rows_scanned": 432
+  },
+  "capability": {
+    "dependency": "Python standard library",
+    "depth": "bounded schema, aggregate profile, missingness, and sensitivity audit",
+    "format": "CSV",
+    "reference": "references/general_scientific_formats.md",
+    "suffix": ".csv",
+    "tier": "automated_core"
+  },
+  "decisions": {
+    "automatic_imputation": false,
+    "automatic_outlier_deletion": false,
+    "automatic_transformation": false,
+    "hypothesis_tests_run": 0
+  },
+  "schema_version": "1.1",
+  "security": {
+    "embedded_instructions_followed": false,
+    "file_text_is_untrusted_data": true,
+    "local_only": true,
+    "raw_values_and_paths_emitted": false
+  }
+}

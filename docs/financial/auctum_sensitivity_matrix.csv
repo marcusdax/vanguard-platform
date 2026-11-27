@@ -1,0 +1,61 @@
+sensitivity_lever,parameter_case,model,m36_monthly_arr_runrate_usd,total_36m_revenue_usd,total_36m_ebitda_usd,m36_gross_margin_pct,monthly_breakeven_month
+Buyer_B2B_Fee_BPS,500 bps (5%),Model_A_Escrow,351461.28,400987.8,-790246.56,44.36,Not_Within_36M
+Buyer_B2B_Fee_BPS,500 bps (5%),Model_B_SaaS,305063.28,441685.68,-583046.09,81.23,Not_Within_36M
+Buyer_B2B_Fee_BPS,500 bps (5%),Model_C_DePIN,1400996.04,1329536.51,-148709.42,86.83,24
+Buyer_B2B_Fee_BPS,500 bps (5%),Blended_Flywheel,2180532.0,2251673.74,561013.57,81.03,17
+Buyer_B2B_Fee_BPS,1000 bps (10% Canonical),Model_A_Escrow,543946.68,633146.37,-558088.0,64.05,Not_Within_36M
+Buyer_B2B_Fee_BPS,1000 bps (10% Canonical),Model_B_SaaS,305063.28,441685.68,-583046.09,81.23,Not_Within_36M
+Buyer_B2B_Fee_BPS,1000 bps (10% Canonical),Model_C_DePIN,1400996.04,1329536.51,-148709.42,86.83,24
+Buyer_B2B_Fee_BPS,1000 bps (10% Canonical),Blended_Flywheel,2440387.32,2552747.06,862086.86,83.05,16
+Buyer_B2B_Fee_BPS,1500 bps (15% Premium),Model_A_Escrow,736432.2,865304.92,-325929.46,73.45,28
+Buyer_B2B_Fee_BPS,1500 bps (15% Premium),Model_B_SaaS,305063.28,441685.68,-583046.09,81.23,Not_Within_36M
+Buyer_B2B_Fee_BPS,1500 bps (15% Premium),Model_C_DePIN,1400996.04,1329536.51,-148709.42,86.83,24
+Buyer_B2B_Fee_BPS,1500 bps (15% Premium),Blended_Flywheel,2700242.64,2853820.39,1163160.19,84.68,15
+Storm_Season_Surge,1.00x (No Surge),Model_A_Escrow,543946.68,577660.86,-601133.07,64.05,Not_Within_36M
+Storm_Season_Surge,1.00x (No Surge),Model_B_SaaS,305063.28,441685.68,-583046.09,81.23,Not_Within_36M
+Storm_Season_Surge,1.00x (No Surge),Model_C_DePIN,1322225.04,1247147.03,-220251.56,86.83,24
+Storm_Season_Surge,1.00x (No Surge),Blended_Flywheel,2361616.32,2401302.71,736128.69,82.92,17
+Storm_Season_Surge,1.35x (Base),Model_A_Escrow,543946.68,633146.37,-558088.0,64.05,Not_Within_36M
+Storm_Season_Surge,1.35x (Base),Model_B_SaaS,305063.28,441685.68,-583046.09,81.23,Not_Within_36M
+Storm_Season_Surge,1.35x (Base),Model_C_DePIN,1400996.04,1329536.51,-148709.42,86.83,24
+Storm_Season_Surge,1.35x (Base),Blended_Flywheel,2440387.32,2552747.06,862086.86,83.05,16
+Storm_Season_Surge,1.85x (Active Hail Year),Model_A_Escrow,543946.68,712411.38,-496595.02,64.05,32
+Storm_Season_Surge,1.85x (Active Hail Year),Model_B_SaaS,305063.28,441685.68,-583046.09,81.23,Not_Within_36M
+Storm_Season_Surge,1.85x (Active Hail Year),Model_C_DePIN,1513526.04,1447235.77,-46506.39,86.83,21
+Storm_Season_Surge,1.85x (Active Hail Year),Blended_Flywheel,2552917.32,2769096.11,1042027.07,83.22,15
+DePIN_Annual_Query_Reuse,1.5x / parcel / yr,Model_A_Escrow,543946.68,633146.37,-558088.0,64.05,Not_Within_36M
+DePIN_Annual_Query_Reuse,1.5x / parcel / yr,Model_B_SaaS,305063.28,441685.68,-583046.09,81.23,Not_Within_36M
+DePIN_Annual_Query_Reuse,1.5x / parcel / yr,Model_C_DePIN,500355.72,474834.46,-890881.95,86.83,35
+DePIN_Annual_Query_Reuse,1.5x / parcel / yr,Blended_Flywheel,1539747.0,1723580.63,140712.07,80.74,20
+DePIN_Annual_Query_Reuse,4.2x / parcel / yr (Base),Model_A_Escrow,543946.68,633146.37,-558088.0,64.05,Not_Within_36M
+DePIN_Annual_Query_Reuse,4.2x / parcel / yr (Base),Model_B_SaaS,305063.28,441685.68,-583046.09,81.23,Not_Within_36M
+DePIN_Annual_Query_Reuse,4.2x / parcel / yr (Base),Model_C_DePIN,1400996.04,1329536.51,-148709.42,86.83,24
+DePIN_Annual_Query_Reuse,4.2x / parcel / yr (Base),Blended_Flywheel,2440387.32,2552747.06,862086.86,83.05,16
+DePIN_Annual_Query_Reuse,8.0x / parcel / yr (Dense Carrier API),Model_A_Escrow,543946.68,633146.37,-558088.0,64.05,Not_Within_36M
+DePIN_Annual_Query_Reuse,8.0x / parcel / yr (Dense Carrier API),Model_B_SaaS,305063.28,441685.68,-583046.09,81.23,Not_Within_36M
+DePIN_Annual_Query_Reuse,8.0x / parcel / yr (Dense Carrier API),Model_C_DePIN,2668563.84,2532450.46,895829.68,86.83,17
+DePIN_Annual_Query_Reuse,8.0x / parcel / yr (Dense Carrier API),Blended_Flywheel,3707955.12,3719722.05,1877355.13,84.4,15
+Payment_Rail_Cost,0.80% (ACH / Prefunded Wallet),Model_A_Escrow,543946.68,633146.37,-487821.57,75.26,Not_Within_36M
+Payment_Rail_Cost,0.80% (ACH / Prefunded Wallet),Model_B_SaaS,305063.28,441685.68,-583046.09,81.23,Not_Within_36M
+Payment_Rail_Cost,0.80% (ACH / Prefunded Wallet),Model_C_DePIN,1400996.04,1329536.51,-148709.42,86.83,24
+Payment_Rail_Cost,0.80% (ACH / Prefunded Wallet),Blended_Flywheel,2440387.32,2552747.06,953233.35,86.42,16
+Payment_Rail_Cost,1.80% (Base Blend),Model_A_Escrow,543946.68,633146.37,-558088.0,64.05,Not_Within_36M
+Payment_Rail_Cost,1.80% (Base Blend),Model_B_SaaS,305063.28,441685.68,-583046.09,81.23,Not_Within_36M
+Payment_Rail_Cost,1.80% (Base Blend),Model_C_DePIN,1400996.04,1329536.51,-148709.42,86.83,24
+Payment_Rail_Cost,1.80% (Base Blend),Blended_Flywheel,2440387.32,2552747.06,862086.86,83.05,16
+Payment_Rail_Cost,2.90% (Full Card Processing),Model_A_Escrow,543946.68,633146.37,-635381.06,51.73,Not_Within_36M
+Payment_Rail_Cost,2.90% (Full Card Processing),Model_B_SaaS,305063.28,441685.68,-583046.09,81.23,Not_Within_36M
+Payment_Rail_Cost,2.90% (Full Card Processing),Model_C_DePIN,1400996.04,1329536.51,-148709.42,86.83,24
+Payment_Rail_Cost,2.90% (Full Card Processing),Blended_Flywheel,2440387.32,2552747.06,761825.74,79.34,16
+SaaS_Monthly_Churn,2.0% / mo,Model_A_Escrow,543946.68,633146.37,-558088.0,64.05,Not_Within_36M
+SaaS_Monthly_Churn,2.0% / mo,Model_B_SaaS,501188.04,613410.58,-486409.77,81.23,36
+SaaS_Monthly_Churn,2.0% / mo,Model_C_DePIN,1400996.04,1329536.51,-148709.42,86.83,24
+SaaS_Monthly_Churn,2.0% / mo,Blended_Flywheel,2636512.08,2724471.96,968637.82,83.34,16
+SaaS_Monthly_Churn,3.5% / mo (Base),Model_A_Escrow,543946.68,633146.37,-558088.0,64.05,Not_Within_36M
+SaaS_Monthly_Churn,3.5% / mo (Base),Model_B_SaaS,305063.28,441685.68,-583046.09,81.23,Not_Within_36M
+SaaS_Monthly_Churn,3.5% / mo (Base),Model_C_DePIN,1400996.04,1329536.51,-148709.42,86.83,24
+SaaS_Monthly_Churn,3.5% / mo (Base),Blended_Flywheel,2440387.32,2552747.06,862086.86,83.05,16
+SaaS_Monthly_Churn,7.0% / mo (Seasonal Churn),Model_A_Escrow,543946.68,633146.37,-558088.0,64.05,Not_Within_36M
+SaaS_Monthly_Churn,7.0% / mo (Seasonal Churn),Model_B_SaaS,93127.08,217883.13,-708988.59,81.23,Not_Within_36M
+SaaS_Monthly_Churn,7.0% / mo (Seasonal Churn),Model_C_DePIN,1400996.04,1329536.51,-148709.42,86.83,24
+SaaS_Monthly_Churn,7.0% / mo (Seasonal Churn),Blended_Flywheel,2228451.12,2328944.5,723223.08,82.67,17

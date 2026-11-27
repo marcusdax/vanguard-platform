@@ -29,7 +29,7 @@
 1. Open **Economics & DePIN** and pick an automatic escrow withholding split (`0%`, `5%`, `10%`, or `15%`) via **Earn-to-Learn Hardware Vault**.
 2. Every settled task splits the stated bounty directly into your worker ledger and Hardware Vault escrow (zero bps deducted as platform commission).
 3. Once your vault balance meets an unlock threshold (`FLIR_THERMAL`, `UAV_PART_107`, `LIDAR_RIG`, `ELECTRIC_MOWER`), click **Redeem** to unlock equipment and adjacent commercial jobs.
-4. Any task captured with homeowner opt-in creates a tracked **Spatial Asset**. When carriers license parcel data (`License Query`), revenue splits automatically: `50%` original capturer, `25%` opt-in homeowner, `25%` protocol treasury/burn, decaying smoothly across a 120-day economic half-life (`refreshMultiplier` kicks in at `>= 90` days).
+4. Any task captured with homeowner opt-in creates a tracked **Spatial Asset**. When carriers license parcel data (`License Query`), revenue splits deterministically from `$16.00` Day-0 down to `$2.50` floor across a 120-day half-life (`25%` original capturer, `10%` opt-in homeowner, `65%` protocol treasury; stale parcels `>= 90` days trigger up to `1.85x` bounty refresh multiplier).
 
 ---
 
@@ -39,7 +39,7 @@ Designed specifically for seniors, family caregivers, and residential property o
 
 1. **Choose Your Service:** Tap **Grocery Carry-In & Check (`$18.00` + `$0.90` community escrow)** or **Quarter-Acre Lawn Care (`$42.00` + `$2.10` community escrow)**.
 2. **Enter Contact Details:** Type your full name and home street address directly below the explanatory prompts. Optionally enter a **Family Member or Caregiver** name so relatives receive an automated digital receipt.
-3. **Optional Privacy-Safe Photo Royalty:** Leave **Share exterior yard condition photos for 25% Homeowner Data Royalty** checked if you wish to earn data licensing shares from non-medical exterior yard scans (faces and license plates remain blurred before upload).
+3. **Optional Privacy-Safe Photo Royalty:** Leave **Share exterior yard condition photos for 10% Homeowner Data Royalty** checked if you wish to earn data licensing shares from non-medical exterior yard scans (faces and license plates remain blurred before upload).
 4. **Receive Your 4-Digit Verbal PIN:** Press **Request Helper Now**. Your screen displays and announces a unique **4-digit Verbal Arrival PIN**. When your helper arrives at the door, speak this 4-digit PIN aloud so they can verify arrival and unlock escrow safely.
 
 ---
